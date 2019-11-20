@@ -1,7 +1,11 @@
 package com.marcos.punchclock.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -11,6 +15,9 @@ public class Employee{
 	
 	@NotEmpty(message = "Name is required")
 	private String name;
+	
+	@OneToMany(mappedBy = "employee")
+	private  List<PunchClock> punchClocks = new ArrayList<PunchClock>();
 
 	public Employee() {}
 	
@@ -34,4 +41,8 @@ public class Employee{
 	public void setName(String name) {
 		this.name = name;
 	}	
+	
+	public List<PunchClock> getPunchClocks(){
+		return this.punchClocks;
+	}
 }
