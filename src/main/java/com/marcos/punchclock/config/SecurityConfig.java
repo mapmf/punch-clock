@@ -1,4 +1,4 @@
-package com.marcos.config;
+package com.marcos.punchclock.config;
 
 import java.util.Arrays;
 

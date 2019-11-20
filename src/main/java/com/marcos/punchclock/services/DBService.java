@@ -1,12 +1,12 @@
-package com.marcos.services;
+package com.marcos.punchclock.services;
 
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.marcos.model.Employee;
-import com.marcos.respositories.EmployeeRepository;
+import com.marcos.punchclock.model.Employee;
+import com.marcos.punchclock.respositories.EmployeeRepository;
 
 @Service
 public class DBService {

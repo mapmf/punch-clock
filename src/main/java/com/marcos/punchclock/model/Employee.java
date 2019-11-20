@@ -1,4 +1,4 @@
-package com.marcos.model;
+package com.marcos.punchclock.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
