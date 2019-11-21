@@ -20,13 +20,6 @@ import com.marcos.punchclock.services.exceptions.InvalidPuchClockException;
 @SpringBootTest
 public class PunchClockServiceTest {
 
-	/*
-	 * @TestConfiguration static class PunchClockServiceTestConfiguration{
-	 * 
-	 * @Bean public PunchClockService punchClockService() { return new
-	 * PunchClockService(); } }
-	 */
-
 	@MockBean
 	private PunchClockRepository punchClockRepository;
 
