@@ -32,9 +32,9 @@ public class DBService {
 		Date date2 = new Date(System.currentTimeMillis() - 400000);
 		Date date3 = new Date(System.currentTimeMillis() - 500000);
 		
-		PunchClock pc1 = new PunchClock(1, date1, e1);
-		PunchClock pc2 = new PunchClock(2, date2, e1);
-		PunchClock pc3 = new PunchClock(3, date3, e2);
+		PunchClock pc1 = new PunchClock(null, date1, e1);
+		PunchClock pc2 = new PunchClock(null, date2, e1);
+		PunchClock pc3 = new PunchClock(null, date3, e2);
 		
 		e1.getPunchClocks().addAll(Arrays.asList(pc1, pc2));
 		e2.getPunchClocks().addAll(Arrays.asList(pc3));
