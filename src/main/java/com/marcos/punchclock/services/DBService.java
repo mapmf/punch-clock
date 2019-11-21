@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.marcos.punchclock.model.Employee;
 import com.marcos.punchclock.model.PunchClock;
-import com.marcos.punchclock.respositories.EmployeeRepository;
-import com.marcos.punchclock.respositories.PunchClockRepository;
+import com.marcos.punchclock.repositories.EmployeeRepository;
+import com.marcos.punchclock.repositories.PunchClockRepository;
 
 @Service
 public class DBService {

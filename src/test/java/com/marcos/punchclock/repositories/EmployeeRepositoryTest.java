@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.marcos.punchclock.model.Employee;
-import com.marcos.punchclock.respositories.EmployeeRepository;
+import com.marcos.punchclock.repositories.EmployeeRepository;
 
 @DataJpaTest
 public class EmployeeRepositoryTest {

@@ -1,4 +1,4 @@
-package com.marcos.punchclock.respositories;
+package com.marcos.punchclock.repositories;
 
 import java.util.Date;
 

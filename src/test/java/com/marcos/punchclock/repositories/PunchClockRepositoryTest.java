@@ -11,8 +11,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.marcos.punchclock.model.Employee;
 import com.marcos.punchclock.model.PunchClock;
-import com.marcos.punchclock.respositories.EmployeeRepository;
-import com.marcos.punchclock.respositories.PunchClockRepository;
+import com.marcos.punchclock.repositories.EmployeeRepository;
+import com.marcos.punchclock.repositories.PunchClockRepository;
 
 @DataJpaTest
 public class PunchClockRepositoryTest {
