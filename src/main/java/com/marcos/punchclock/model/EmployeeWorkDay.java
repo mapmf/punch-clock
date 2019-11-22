@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.marcos.punchclock.model.util.PunchClockRestTime;
 import com.marcos.punchclock.model.util.WorkingPunchClockInterval;
 
@@ -59,6 +60,7 @@ public class EmployeeWorkDay implements Serializable {
 		this.employee = employee;
 	}
 
+	@JsonFormat(pattern = "MM/dd/yyyy HH:mm")
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -111,11 +113,11 @@ public class EmployeeWorkDay implements Serializable {
 					returnPunchClock.getDate());
 
 			if (!restInterval.isValidInterval()) {
-				return false;
+				return true;
 			}
 		}
 
-		return true;
+		return false;
 
 	}
 

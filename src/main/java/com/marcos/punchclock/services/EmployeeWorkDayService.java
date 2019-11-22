@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.marcos.punchclock.model.Employee;
 import com.marcos.punchclock.model.EmployeeWorkDay;
 import com.marcos.punchclock.repositories.EmployeeWorkDayRepository;
 import com.marcos.punchclock.util.DateUtil;
@@ -32,4 +33,15 @@ public class EmployeeWorkDayService {
 		return employeeWorkDayRepository.save(workDay);
 
 	}
+	
+	public EmployeeWorkDay getByEmployeeAndDate(Employee employee, Date date) {
+		
+		EmployeeWorkDay workDay = new EmployeeWorkDay();
+		workDay.setEmployee(employee);
+		workDay.setCreatedAt(date);
+		
+		return createIfNotExist(workDay);
+	}
+	
+	
 }

@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class PunchClock implements Serializable{
 	
@@ -19,12 +22,15 @@ public class PunchClock implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@JsonFormat(pattern = "MM/dd/yyyy HH:mm")
 	@NotNull
 	private Date date;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Employee employee;
 	
+	@JsonIgnore
 	@ManyToOne
 	private EmployeeWorkDay employeeWorkDay;
 	

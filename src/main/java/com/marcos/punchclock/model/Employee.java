@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Employee{
 	@Id
@@ -16,6 +18,7 @@ public class Employee{
 	@NotEmpty(message = "Name is required")
 	private String name;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "employee")
 	private List<EmployeeWorkDay> employeeWorkDays = new ArrayList<EmployeeWorkDay>();
 	
