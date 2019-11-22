@@ -28,4 +28,20 @@ public class DateUtil {
 		
 		return calendar.getTime();
 	}
+	
+	public static double getIntervalInHours(Date date1, Date date2) {
+		
+		long intervalInMiliseconds = getIntervalInMiliseconds(date1, date2);
+		
+		long hourInMiliseconds = 60*60*1000;
+		
+		return intervalInMiliseconds/hourInMiliseconds;
+		
+	}
+	
+	public static long getIntervalInMiliseconds(Date date1, Date date2) {
+		
+		return date2.getTime() - date1.getTime();
+		
+	}
 }

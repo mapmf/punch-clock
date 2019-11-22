@@ -32,5 +32,4 @@ public class EmployeeWorkDayService {
 		return employeeWorkDayRepository.save(workDay);
 
 	}
-
 }

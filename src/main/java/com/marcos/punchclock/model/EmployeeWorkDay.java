@@ -2,6 +2,7 @@ package com.marcos.punchclock.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.marcos.punchclock.util.DateUtil;
 
 @Entity
 public class EmployeeWorkDay implements Serializable{
@@ -70,7 +73,28 @@ public class EmployeeWorkDay implements Serializable{
 		this.punchClocks = punchClocks;
 	}
 	
-	
+	public double getWorkingHours() {
+
+		punchClocks.sort(Comparator.comparing(PunchClock::getDate));
+		
+		double workingHours = 0;
+		
+		for (int i = 0; i < punchClocks.size() - 1; i = i+2) {
+			
+			PunchClock inPunchClock = punchClocks.get(i);
+			PunchClock outPunchClock = punchClocks.get(i+1);
+			
+			Date inPunchClockDate = inPunchClock.getDate();
+			Date outPunchClockDate = outPunchClock.getDate();
+
+			double intervalInHours = DateUtil.getIntervalInHours(inPunchClockDate, outPunchClockDate);
+			
+			workingHours += intervalInHours;
+			
+		}
+		
+		return workingHours;
+	}
 	
 	
 }
