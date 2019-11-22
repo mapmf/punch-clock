@@ -2,6 +2,7 @@ package com.marcos.punchclock.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
@@ -26,9 +27,9 @@ public class EmployeeWorkDayServiceTest {
 	@Test
 	public void it_should_save_work_day() {
 
-		EmployeeWorkDay employeeWorkDay = createObj();
+		EmployeeWorkDay employeeWorkDay = createWorkDay();
 
-		EmployeeWorkDay expectedpersitedEmployeeWorkDay = createObj();
+		EmployeeWorkDay expectedpersitedEmployeeWorkDay = createWorkDay();
 		expectedpersitedEmployeeWorkDay.setId(1);
 		
 		Mockito.when(employeeWorkDayRepository.findByEmployeeAndCreatedAtBetween(Mockito.any(), Mockito.any(),
@@ -44,21 +45,21 @@ public class EmployeeWorkDayServiceTest {
 	@Test
 	public void it_should_get_work_day() {
 
-		EmployeeWorkDay employeeWorkDay = createObj();
+		EmployeeWorkDay employeeWorkDay = createWorkDay();
 		employeeWorkDay.setId(1);
 		
-		EmployeeWorkDay expectedpersitedEmployeeWorkDay = createObj();
+		EmployeeWorkDay expectedpersitedEmployeeWorkDay = createWorkDay();
 		expectedpersitedEmployeeWorkDay.setId(2);
 		
 		Mockito.when(employeeWorkDayRepository.findByEmployeeAndCreatedAtBetween(Mockito.any(), Mockito.any(),
-				Mockito.any())).thenReturn(expectedpersitedEmployeeWorkDay);
+				Mockito.any())).thenReturn(Arrays.asList(expectedpersitedEmployeeWorkDay));
 		
 		EmployeeWorkDay actualpersitedEmployeeWorkDay = employeeWorkDayService.createIfNotExist(employeeWorkDay);
 		
 		assertEquals(expectedpersitedEmployeeWorkDay.getId(), actualpersitedEmployeeWorkDay.getId());
 	}
 
-	private EmployeeWorkDay createObj() {
+	private EmployeeWorkDay createWorkDay() {
 
 		Employee employee = new Employee();
 		employee.setPis("12345678910");

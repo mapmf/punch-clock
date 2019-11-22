@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.marcos.punchclock.model.Employee;
+import com.marcos.punchclock.model.EmployeeWorkDay;
 import com.marcos.punchclock.model.PunchClock;
 import com.marcos.punchclock.repositories.PunchClockRepository;
 import com.marcos.punchclock.services.exceptions.InvalidPuchClockException;
@@ -22,6 +23,9 @@ public class PunchClockServiceTest {
 
 	@MockBean
 	private PunchClockRepository punchClockRepository;
+	
+	@MockBean
+	private EmployeeWorkDayService employeeWorkDayService;
 
 	@Autowired
 	PunchClockService punchClockService;
@@ -35,6 +39,10 @@ public class PunchClockServiceTest {
 				.thenReturn(null);
 
 		Mockito.when(punchClockRepository.save(punchClock)).thenReturn(punchClock);
+		
+		EmployeeWorkDay workDay = createWorkDay();
+		
+		Mockito.when(employeeWorkDayService.createIfNotExist(workDay)).thenReturn(workDay);
 
 		PunchClock persistedPunchClock = punchClockService.insert(punchClock);
 
@@ -46,7 +54,7 @@ public class PunchClockServiceTest {
 
 		try {
 
-			Employee employee = getEmployee();
+			Employee employee = createEmployee();
 
 			Calendar calendar = Calendar.getInstance();
 
@@ -80,12 +88,21 @@ public class PunchClockServiceTest {
 
 	}
 
-	private Employee getEmployee() {
+	private Employee createEmployee() {
 
 		Employee employee = new Employee();
 		employee.setName("Oliver");
 		employee.setPis("12345678910");
 
 		return employee;
+	}
+	
+	private EmployeeWorkDay createWorkDay() {
+
+		Employee employee = createEmployee();
+
+		Date date = new Date();
+
+		return new EmployeeWorkDay(null, employee, date);
 	}
 }

@@ -1,6 +1,7 @@
 package com.marcos.punchclock.services;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,10 @@ public class EmployeeWorkDayService {
 		Date beginOfDay = DateUtil.getBeginOfDay(createdAt);
 		Date endOfDay = DateUtil.getEndOfDay(createdAt);
 
-		EmployeeWorkDay existingWorkDay = employeeWorkDayRepository.findByEmployeeAndCreatedAtBetween(workDay.getEmployee(), beginOfDay, endOfDay);
+		List<EmployeeWorkDay> existingWorkDay = employeeWorkDayRepository.findByEmployeeAndCreatedAtBetween(workDay.getEmployee(), beginOfDay, endOfDay);
 		
-		if(existingWorkDay != null) {
-			return existingWorkDay;
+		if(existingWorkDay!= null && !existingWorkDay.isEmpty()) {
+			return existingWorkDay.get(0);
 		}
 
 		return employeeWorkDayRepository.save(workDay);
