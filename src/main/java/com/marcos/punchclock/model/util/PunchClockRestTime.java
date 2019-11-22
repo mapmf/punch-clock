@@ -1,4 +1,4 @@
-package com.marcos.punchclock.model;
+package com.marcos.punchclock.model.util;
 
 import java.util.Date;
 

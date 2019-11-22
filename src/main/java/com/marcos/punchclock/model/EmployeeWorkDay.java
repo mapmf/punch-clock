@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.marcos.punchclock.model.util.PunchClockRestTime;
+import com.marcos.punchclock.model.util.WorkingPunchClockInterval;
+
 @Entity
 public class EmployeeWorkDay implements Serializable {
 

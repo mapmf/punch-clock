@@ -1,8 +1,9 @@
-package com.marcos.punchclock.model;
+package com.marcos.punchclock.model.util;
 
 import java.util.Calendar;
 import java.util.Date;
 
+import com.marcos.punchclock.model.PunchClock;
 import com.marcos.punchclock.util.DateUtil;
 
 public class WorkingPunchClockInterval {

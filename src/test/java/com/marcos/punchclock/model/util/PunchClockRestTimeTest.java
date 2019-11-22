@@ -1,4 +1,4 @@
-package com.marcos.punchclock.model;
+package com.marcos.punchclock.model.util;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -8,6 +8,10 @@ import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import com.marcos.punchclock.model.PunchClock;
+import com.marcos.punchclock.model.util.PunchClockRestTime;
+import com.marcos.punchclock.model.util.WorkingPunchClockInterval;
 
 public class PunchClockRestTimeTest {
 
