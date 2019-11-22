@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Profile;
 import com.marcos.punchclock.services.DBService;
 
 @Configuration
-@Profile("test")
-public class TestConfig {
+@Profile("dev")
+public class DevConfig {
 
 	@Autowired
 	DBService dbService;
