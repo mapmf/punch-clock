@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.marcos.punchclock.model.Employee;
 import com.marcos.punchclock.model.EmployeeWorkDay;
 import com.marcos.punchclock.repositories.EmployeeWorkDayRepository;
+import com.marcos.punchclock.services.exceptions.ObjectNotFoundException;
 import com.marcos.punchclock.util.DateUtil;
 
 @Service
@@ -24,24 +25,47 @@ public class EmployeeWorkDayService {
 		Date beginOfDay = DateUtil.getBeginOfDay(createdAt);
 		Date endOfDay = DateUtil.getEndOfDay(createdAt);
 
-		List<EmployeeWorkDay> existingWorkDay = employeeWorkDayRepository.findByEmployeeAndCreatedAtBetween(workDay.getEmployee(), beginOfDay, endOfDay);
-		
-		if(existingWorkDay!= null && !existingWorkDay.isEmpty()) {
+		List<EmployeeWorkDay> existingWorkDay = employeeWorkDayRepository
+				.findByEmployeeAndCreatedAtBetween(workDay.getEmployee(), beginOfDay, endOfDay);
+
+		if (existingWorkDay != null && !existingWorkDay.isEmpty()) {
 			return existingWorkDay.get(0);
 		}
 
 		return employeeWorkDayRepository.save(workDay);
 
 	}
-	
+
 	public EmployeeWorkDay getByEmployeeAndDate(Employee employee, Date date) {
-		
-		EmployeeWorkDay workDay = new EmployeeWorkDay();
-		workDay.setEmployee(employee);
-		workDay.setCreatedAt(date);
-		
-		return createIfNotExist(workDay);
+
+		Date beginOfDay = DateUtil.getBeginOfDay(date);
+		Date endOfDay = DateUtil.getEndOfDay(date);
+
+		List<EmployeeWorkDay> existingWorkDays = getByEmployeeAndDateBetween(employee, beginOfDay, endOfDay);
+
+		return existingWorkDays.get(0);
 	}
 	
-	
+	public List<EmployeeWorkDay> getByEmployeeAndMonth(Employee employee, Date monthDate) {
+
+		Date beginOfMonth = DateUtil.getBeginOfMonth(monthDate);
+		Date endOfMonth = DateUtil.getEndOfMonth(monthDate);
+		
+		List<EmployeeWorkDay> existingWorkDays = getByEmployeeAndDateBetween(employee, beginOfMonth, endOfMonth);
+
+		return existingWorkDays;
+	}
+
+	public List<EmployeeWorkDay> getByEmployeeAndDateBetween(Employee employee, Date startDate, Date endDate) {
+
+		List<EmployeeWorkDay> workDays = employeeWorkDayRepository.findByEmployeeAndCreatedAtBetween(employee,
+				startDate, endDate);
+
+		if (workDays.isEmpty()) {
+			throw new ObjectNotFoundException("No workdays existin in interval of " + startDate + " and " + endDate);
+		}
+
+		return workDays;
+	}
+
 }

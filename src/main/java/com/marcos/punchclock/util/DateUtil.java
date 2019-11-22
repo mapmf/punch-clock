@@ -29,6 +29,34 @@ public class DateUtil {
 		return calendar.getTime();
 	}
 	
+	public static Date getBeginOfMonth(Date date) {
+		
+		Calendar calendar = Calendar.getInstance();
+		
+		calendar.setTime(date);
+
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.set(Calendar.HOUR, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		
+		return calendar.getTime();
+	}
+	
+	public static Date getEndOfMonth(Date date) {
+		
+		Calendar calendar = Calendar.getInstance();
+		
+		Date beginOfMonth = getBeginOfMonth(date);
+		
+		calendar.setTime(beginOfMonth);
+		
+		calendar.add(Calendar.MONTH, 1);
+		calendar.add(Calendar.DAY_OF_MONTH, -1);
+		
+		return calendar.getTime();
+	}
+	
 	public static double getIntervalInHours(Date date1, Date date2) {
 		
 		double intervalInMiliseconds = getIntervalInMiliseconds(date1, date2);
