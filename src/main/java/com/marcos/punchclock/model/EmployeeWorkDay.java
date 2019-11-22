@@ -13,27 +13,26 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.marcos.punchclock.util.DateUtil;
-
 @Entity
-public class EmployeeWorkDay implements Serializable{
-	
+public class EmployeeWorkDay implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@ManyToOne
 	private Employee employee;
-	
+
 	private Date createdAt;
-	
+
 	@OneToMany(mappedBy = "employeeWorkDay")
 	private List<PunchClock> punchClocks = new ArrayList<PunchClock>();
 
-	public EmployeeWorkDay() {}
-	
+	public EmployeeWorkDay() {
+	}
+
 	public EmployeeWorkDay(Integer id, Employee employee, Date createdAt) {
 
 		this.id = id;
@@ -72,29 +71,49 @@ public class EmployeeWorkDay implements Serializable{
 	public void setPunchClocks(List<PunchClock> punchClocks) {
 		this.punchClocks = punchClocks;
 	}
-	
+
 	public double getWorkingHours() {
 
 		punchClocks.sort(Comparator.comparing(PunchClock::getDate));
-		
-		double workingHours = 0;
-		
-		for (int i = 0; i < punchClocks.size() - 1; i = i+2) {
-			
-			PunchClock inPunchClock = punchClocks.get(i);
-			PunchClock outPunchClock = punchClocks.get(i+1);
-			
-			Date inPunchClockDate = inPunchClock.getDate();
-			Date outPunchClockDate = outPunchClock.getDate();
 
-			double intervalInHours = DateUtil.getIntervalInHours(inPunchClockDate, outPunchClockDate);
-			
-			workingHours += intervalInHours;
-			
+		double workingHours = 0;
+
+		for (int i = 0; i < punchClocks.size() - 1; i = i + 2) {
+
+			PunchClock inPunchClock = punchClocks.get(i);
+			PunchClock outPunchClock = punchClocks.get(i + 1);
+
+			WorkingPunchClockInterval interval = new WorkingPunchClockInterval(inPunchClock, outPunchClock);
+
+			workingHours += interval.calculateHours();
+
 		}
-		
+
 		return workingHours;
 	}
-	
-	
+
+	public boolean getMissingAnyRestTime() {
+
+		punchClocks.sort(Comparator.comparing(PunchClock::getDate));
+
+		for (int i = 0; i < punchClocks.size() - 2; i = i + 3) {
+
+			PunchClock inPunchClock = punchClocks.get(i);
+			PunchClock outPunchClock = punchClocks.get(i + 1);
+			PunchClock returnPunchClock = punchClocks.get(i + 2);
+
+			WorkingPunchClockInterval workingInterval = new WorkingPunchClockInterval(inPunchClock, outPunchClock);
+
+			PunchClockRestTime restInterval = new PunchClockRestTime(workingInterval,
+					returnPunchClock.getDate());
+
+			if (!restInterval.isValidInterval()) {
+				return false;
+			}
+		}
+
+		return true;
+
+	}
+
 }
