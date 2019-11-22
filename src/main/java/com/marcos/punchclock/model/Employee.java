@@ -17,8 +17,8 @@ public class Employee{
 	private String name;
 	
 	@OneToMany(mappedBy = "employee")
-	private  List<PunchClock> punchClocks = new ArrayList<PunchClock>();
-
+	private List<EmployeeWorkDay> employeeWorkDays = new ArrayList<EmployeeWorkDay>();
+	
 	public Employee() {}
 	
 	public Employee(String pis, String name) {
@@ -42,7 +42,7 @@ public class Employee{
 		this.name = name;
 	}	
 	
-	public List<PunchClock> getPunchClocks(){
-		return this.punchClocks;
+	public List<EmployeeWorkDay> getEmployeeWorkDays(){
+		return this.employeeWorkDays;
 	}
 }

@@ -33,10 +33,8 @@ public class PunchClockServiceTest {
 
 		Mockito.when(punchClockRepository.findByEmployeeAndDateBetween(Mockito.any(), Mockito.any(), Mockito.any()))
 				.thenReturn(null);
-		
-		Mockito.when(punchClockRepository.save(punchClock))
-		.thenReturn(punchClock);
 
+		Mockito.when(punchClockRepository.save(punchClock)).thenReturn(punchClock);
 
 		PunchClock persistedPunchClock = punchClockService.insert(punchClock);
 
@@ -51,13 +49,6 @@ public class PunchClockServiceTest {
 			Employee employee = getEmployee();
 
 			Calendar calendar = Calendar.getInstance();
-
-			calendar.set(Calendar.YEAR, 2019);
-			calendar.set(Calendar.MONTH, 11);
-			calendar.set(Calendar.DAY_OF_MONTH, 20);
-			calendar.set(Calendar.HOUR, 23);
-			calendar.set(Calendar.MINUTE, 10);
-			calendar.set(Calendar.SECOND, 30);
 
 			Date startDate = calendar.getTime();
 

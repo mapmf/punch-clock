@@ -1,17 +1,19 @@
 package com.marcos.punchclock.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
+import javax.persistence.OneToMany;
 
 @Entity
-public class PunchClock implements Serializable{
+public class EmployeeWorkDay implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
@@ -19,23 +21,21 @@ public class PunchClock implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotNull
-	private Date date;
-	
 	@ManyToOne
 	private Employee employee;
 	
-	@ManyToOne
-	private EmployeeWorkDay employeeWorkDay;
+	private Date createdAt;
 	
+	@OneToMany(mappedBy = "employeeWorkDay")
+	private List<PunchClock> punchClocks = new ArrayList<PunchClock>();
 
-	public PunchClock() {}
+	public EmployeeWorkDay() {}
 	
-	public PunchClock(Integer id, @NotNull Date date, Employee employee, EmployeeWorkDay employeeWorkDay) {
+	public EmployeeWorkDay(Integer id, Employee employee, Date createdAt) {
+
 		this.id = id;
-		this.date = date;
 		this.employee = employee;
-		this.employeeWorkDay = employeeWorkDay;
+		this.createdAt = createdAt;
 	}
 
 	public Integer getId() {
@@ -46,14 +46,6 @@ public class PunchClock implements Serializable{
 		this.id = id;
 	}
 
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
 	public Employee getEmployee() {
 		return employee;
 	}
@@ -61,15 +53,22 @@ public class PunchClock implements Serializable{
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-	
-	public EmployeeWorkDay getEmployeeWorkDay() {
-		return employeeWorkDay;
+
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setEmployeeWorkDay(EmployeeWorkDay employeeWorkDay) {
-		this.employeeWorkDay = employeeWorkDay;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
-	
+
+	public List<PunchClock> getPunchClocks() {
+		return punchClocks;
+	}
+
+	public void setPunchClocks(List<PunchClock> punchClocks) {
+		this.punchClocks = punchClocks;
+	}
 	
 	
 	
