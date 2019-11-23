@@ -14,21 +14,18 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Length;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marcos.punchclock.model.enums.Profile;
 
 @Entity
 public class Employee {
 	@Id
-	private String pis;
+	private String id;
 
 	@NotEmpty(message = "Name is required")
 	private String name;
 
 	@JsonIgnore
-	@Length(min = 6, message = "Password must have 6 characters at least")
 	@NotNull(message = "Password is required")
 	private String password;
 
@@ -44,21 +41,21 @@ public class Employee {
 		addProfile(Profile.USER);
 	}
 
-	public Employee(String pis, String name, String password) {
+	public Employee(String id, String name, String password) {
 		
-		this.pis = pis;
+		this.id = id;
 		this.name = name;
 		this.password = password;
 		
 		addProfile(Profile.USER);
 	}
 
-	public String getPis() {
-		return pis;
+	public String getId() {
+		return id;
 	}
 
-	public void setPis(String pis) {
-		this.pis = pis;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {

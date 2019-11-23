@@ -61,7 +61,7 @@ public class PunchClockRepositoryTest {
 
 		Employee employee = new Employee();
 		employee.setName("Oliver");
-		employee.setPis("12345678910");
+		employee.setId("12345678910");
 
 		employee = employeeRepository.save(employee);
 		

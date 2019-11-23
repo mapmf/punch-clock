@@ -24,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 			 throw new UsernameNotFoundException(pis);
 		}
 		
-		return new UserSecurity(employee.getPis(), employee.getPassword(), employee.getProfiles());
+		return new UserSecurity(employee.getId(), employee.getPassword(), employee.getProfiles());
 	}
 
 }

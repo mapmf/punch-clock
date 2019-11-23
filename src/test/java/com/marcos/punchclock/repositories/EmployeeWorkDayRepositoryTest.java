@@ -63,7 +63,7 @@ public class EmployeeWorkDayRepositoryTest {
 	private EmployeeWorkDay createWorkDay() {
 
 		Employee employee = new Employee();
-		employee.setPis("12345678910");
+		employee.setId("12345678910");
 		employee.setName("Marcos");
 
 		employee = employeeRepository.save(employee);

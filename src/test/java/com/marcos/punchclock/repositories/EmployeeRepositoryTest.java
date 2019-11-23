@@ -19,12 +19,12 @@ public class EmployeeRepositoryTest {
 	public void it_should_save_employee() {
 		
 		Employee employee = new Employee();
-		employee.setPis("12345678910");
+		employee.setId("12345678910");
 		employee.setName("Marcos");
 		
 		employee = employeeRepository.save(employee);
 		
-		Employee persistedEmployee = employeeRepository.findById(employee.getPis()).get();
+		Employee persistedEmployee = employeeRepository.findById(employee.getId()).get();
 		
 		assertEquals(employee, persistedEmployee);
 	}

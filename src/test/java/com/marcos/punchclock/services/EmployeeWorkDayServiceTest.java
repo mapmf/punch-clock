@@ -102,7 +102,7 @@ public class EmployeeWorkDayServiceTest {
 	private EmployeeWorkDay createWorkDay() {
 
 		Employee employee = new Employee();
-		employee.setPis("12345678910");
+		employee.setId("12345678910");
 		employee.setName("Marcos");
 
 		Date date = new Date();
