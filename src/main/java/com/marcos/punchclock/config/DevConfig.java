@@ -12,7 +12,7 @@ import com.marcos.punchclock.services.DBService;
 public class DevConfig {
 
 	@Autowired
-	DBService dbService;
+	private DBService dbService;
 	
 	@Bean
 	public boolean instantiateDatabase() {

@@ -33,9 +33,9 @@ public class ResourceExceptionHandler {
 
 		Date date = new Date();
 
-		StandardError error = new StandardError(HttpStatus.BAD_REQUEST.value(), invalidPuchClockException.getMessage(),
+		StandardError error = new StandardError(HttpStatus.FORBIDDEN.value(), invalidPuchClockException.getMessage(),
 				date.getTime());
 
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
 	}
 }
