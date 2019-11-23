@@ -16,6 +16,11 @@ public class EmployeeWorkDayTest {
 		int expected = 4;
 
 		Calendar calendar = Calendar.getInstance();
+
+		calendar.set(Calendar.DAY_OF_WEEK, 4);
+		calendar.set(Calendar.HOUR_OF_DAY, 8);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
 		
 		PunchClock mock1 = Mockito.mock(PunchClock.class);
 		Mockito.when(mock1.getDate()).thenReturn(calendar.getTime());
@@ -41,6 +46,12 @@ public class EmployeeWorkDayTest {
 		int expected = 8;
 
 		Calendar calendar = Calendar.getInstance();
+		
+		calendar.set(Calendar.DAY_OF_WEEK, 4);
+		calendar.set(Calendar.HOUR_OF_DAY, 8);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		
 		
 		PunchClock mock1 = Mockito.mock(PunchClock.class);
 		Mockito.when(mock1.getDate()).thenReturn(calendar.getTime());
@@ -77,6 +88,12 @@ public class EmployeeWorkDayTest {
 		int expected = 4;
 
 		Calendar calendar = Calendar.getInstance();
+		
+		calendar.set(Calendar.DAY_OF_WEEK, 4);
+		calendar.set(Calendar.HOUR_OF_DAY, 8);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		
 		
 		PunchClock mock1 = Mockito.mock(PunchClock.class);
 		Mockito.when(mock1.getDate()).thenReturn(calendar.getTime());
