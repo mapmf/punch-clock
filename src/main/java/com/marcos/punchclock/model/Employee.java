@@ -79,6 +79,7 @@ public class Employee {
 		profileIds.add(profile.getId());
 	}
 
+	@JsonIgnore
 	public Set<Profile> getProfiles() {
 
 		Set<Profile> profiles = new HashSet<Profile>();
@@ -86,7 +87,6 @@ public class Employee {
 		for (int profileId : this.profileIds) {
 			profiles.add(Profile.toEnum(profileId));
 		}
-		//return profiles.stream().map(p -> Profile.toEnum(p)).collect(Collectors.toSet());
 		
 		return profiles;
 	}
