@@ -28,7 +28,7 @@ public class EmployeeNewDTO implements Serializable{
 	private String id;
 	
 	@NotNull(message = "Name is required")
-	@Length(min = 3)
+	@Length(min = 3, max=200)
 	private String name;
 	
 	@NotEmpty(message = "Password is required")

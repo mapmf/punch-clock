@@ -60,7 +60,7 @@ public class EmployeeResourceTest {
 
 		mockAuthenticatedEmployee();
 		
-		EmployeeNewDTO dto = mockEmployeeDTO();
+		EmployeeNewDTO dto = mockEmployeeDTO("06982236360");
 		
 		ResponseEntity<Void> result = tesRestTemplate.withBasicAuth("12345678910", "123").postForEntity("/employees",
 				dto, Void.class);
@@ -73,19 +73,32 @@ public class EmployeeResourceTest {
 
 		mockAuthenticatedAdmin();
 		
-		EmployeeNewDTO dto = mockEmployeeDTO();
+		EmployeeNewDTO dto = mockEmployeeDTO("06982236360");
 		
 		ResponseEntity<Void> result = tesRestTemplate.withBasicAuth("admin", "admin").postForEntity("/employees",
 				dto, Void.class);
 		
 		assertEquals(HttpStatus.CREATED.value(), result.getStatusCode().value());
 	}
+	
+	@Test
+	public void it_should_not_add_new_employee_with_invalid_pis() throws Exception {
 
-	private EmployeeNewDTO mockEmployeeDTO() {
+		mockAuthenticatedAdmin();
+		
+		EmployeeNewDTO dto = mockEmployeeDTO("12345678901");
+		
+		ResponseEntity<Void> result = tesRestTemplate.withBasicAuth("admin", "admin").postForEntity("/employees",
+				dto, Void.class);
+		
+		assertEquals(HttpStatus.BAD_REQUEST.value(), result.getStatusCode().value());
+	}
+
+	private EmployeeNewDTO mockEmployeeDTO(String pis) {
 
 		String password = "123";
 		
-		Employee employee = EmployeeTestUtil.createEmployee("12345678910", password);
+		Employee employee = EmployeeTestUtil.createEmployee(pis, password); //must be valid PIS
 		
 		EmployeeNewDTO dto = new EmployeeNewDTO(employee);
 		dto.setPassword(password);
