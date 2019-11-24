@@ -6,6 +6,7 @@ To run tests please turn **spring.profiles.active** to **test** in application.p
 To startup application with preloaded data turn **spring.profiles.active** to **dev** in application.properties
 and **spring.jpa.hibernate.ddl-auto** to **create** in application-dev.properties. If you want persist data on 
 restart server turn **spring.jpa.hibernate.ddl-auto** to **none**
+
 Besides it's necessary have a database called punch_clock in a MySQL instance
 
 To run application with production mode turn **spring.profiles.active** to **prod** in application.properties
