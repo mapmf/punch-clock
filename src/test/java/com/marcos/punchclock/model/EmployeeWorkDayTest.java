@@ -34,7 +34,7 @@ public class EmployeeWorkDayTest {
 		EmployeeWorkDay workDay = new EmployeeWorkDay();
 		workDay.getPunchClocks().addAll(Arrays.asList(mock1, mock2));
 		
-		double actual = workDay.getWorkingHours();
+		double actual = workDay.calculateWorkingHours();
 		
 		assertEquals(expected, actual);
 		
@@ -76,7 +76,7 @@ public class EmployeeWorkDayTest {
 		EmployeeWorkDay workDay = new EmployeeWorkDay();
 		workDay.getPunchClocks().addAll(Arrays.asList(mock1, mock2, mock3, mock4));
 		
-		double actual = workDay.getWorkingHours();
+		double actual = workDay.calculateWorkingHours();
 		
 		assertEquals(expected, actual);
 		
@@ -112,7 +112,7 @@ public class EmployeeWorkDayTest {
 		EmployeeWorkDay workDay = new EmployeeWorkDay();
 		workDay.getPunchClocks().addAll(Arrays.asList(mock1, mock2, mock3));
 		
-		double actual = workDay.getWorkingHours();
+		double actual = workDay.calculateWorkingHours();
 		
 		assertEquals(expected, actual);
 		

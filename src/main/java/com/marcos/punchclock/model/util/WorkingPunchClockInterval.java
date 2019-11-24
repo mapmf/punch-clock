@@ -1,5 +1,7 @@
 package com.marcos.punchclock.model.util;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -8,6 +10,7 @@ import com.marcos.punchclock.util.DateUtil;
 
 public class WorkingPunchClockInterval {
 
+	private static final int NUMBER_OF_DECIMALS = 2;
 	private static final double SUNDAY = 1;
 	private static final double SATURDAY = 7;
 	private static final int HOUR_TO_START_COUNT_ADDITIONAL_NIGHT = 22;
@@ -15,7 +18,7 @@ public class WorkingPunchClockInterval {
 	private static final double SATURDAY_MODIFIER = 1.5;
 	private static final double SUNDAY_MODIFIER = 2;
 	private static final double ADDITIONAL_NIGHT_MODIFIER = 0.2;
-	
+
 	private Date inDate;
 	private Date outDate;
 
@@ -41,7 +44,7 @@ public class WorkingPunchClockInterval {
 	}
 
 	public double calculateHours() {
-		
+
 		double intervalInHours = getBasicIntervalInHours();
 
 		Calendar calendar = Calendar.getInstance();
@@ -49,7 +52,7 @@ public class WorkingPunchClockInterval {
 		calendar.setTime(inDate);
 
 		int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-		
+
 		if (dayOfWeek == SUNDAY) {
 
 			intervalInHours = intervalInHours * SUNDAY_MODIFIER;
@@ -57,21 +60,23 @@ public class WorkingPunchClockInterval {
 		} else if (dayOfWeek == SATURDAY) {
 
 			intervalInHours = intervalInHours * SATURDAY_MODIFIER;
-			
+
 		} else {
-			
+
 			intervalInHours = intervalInHours + calculateAdditionalNight(inDate, outDate);
 		}
 
-		return intervalInHours;
-		
+		BigDecimal bigDecimal = new BigDecimal(intervalInHours).setScale(NUMBER_OF_DECIMALS, RoundingMode.DOWN);
+
+		return bigDecimal.doubleValue();
+
 	}
-	
+
 	public double getBasicIntervalInHours() {
-		
+
 		return DateUtil.getIntervalInHours(inDate, outDate);
 	}
-	
+
 	private double calculateAdditionalNight(Date start, Date end) {
 
 		Calendar calendar = Calendar.getInstance();
@@ -89,7 +94,7 @@ public class WorkingPunchClockInterval {
 		Date endNightAdditional = calendar.getTime();
 
 		boolean hasNightAdditional = false;
-		
+
 		if (start.after(startNightAdditional)) {
 			startNightAdditional = start;
 			hasNightAdditional = true;
@@ -101,16 +106,15 @@ public class WorkingPunchClockInterval {
 		}
 
 		double additionalNight = 0.0;
-		
-		if(hasNightAdditional) {
-			
+
+		if (hasNightAdditional) {
+
 			double additionalNightInterval = DateUtil.getIntervalInHours(startNightAdditional, endNightAdditional);
-			
+
 			additionalNight = additionalNightInterval * ADDITIONAL_NIGHT_MODIFIER;
 		}
 
 		return additionalNight;
 	}
 
-	
 }

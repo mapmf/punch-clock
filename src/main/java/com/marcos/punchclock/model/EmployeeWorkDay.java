@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.marcos.punchclock.model.util.EmployeeHoursFormatterUtil;
 import com.marcos.punchclock.model.util.PunchClockRestTime;
 import com.marcos.punchclock.model.util.WorkingPunchClockInterval;
 
@@ -77,7 +78,14 @@ public class EmployeeWorkDay implements Serializable {
 		this.punchClocks = punchClocks;
 	}
 
-	public double getWorkingHours() {
+	public String getWorkingHours() {
+		
+		double workingHours = calculateWorkingHours();
+		
+		return EmployeeHoursFormatterUtil.format(workingHours);
+	}
+	
+	public double calculateWorkingHours() {
 
 		punchClocks.sort(Comparator.comparing(PunchClock::getDate));
 
