@@ -4,8 +4,6 @@ A Rest API to manage employee's clocks
 To run tests please turn **spring.profiles.active** to **test** in application.properties first
 
 To startup application with preloaded data turn **spring.profiles.active** to **dev** in application.properties
-and **spring.jpa.hibernate.ddl-auto** to **create** in application-dev.properties. If you want persist data on 
-restart server turn **spring.jpa.hibernate.ddl-auto** to **none**
 
 Besides it's necessary have a database called punch_clock in a MySQL instance
 
