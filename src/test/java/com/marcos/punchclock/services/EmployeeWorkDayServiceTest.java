@@ -16,6 +16,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import com.marcos.punchclock.model.Employee;
 import com.marcos.punchclock.model.EmployeeWorkDay;
 import com.marcos.punchclock.repositories.EmployeeWorkDayRepository;
+import com.marcos.punchclock.util.EmployeeTestUtil;
 
 @SpringBootTest
 public class EmployeeWorkDayServiceTest {
@@ -29,81 +30,78 @@ public class EmployeeWorkDayServiceTest {
 	@Test
 	public void it_should_save_work_day() {
 
-		EmployeeWorkDay employeeWorkDay = createWorkDay();
-
-		EmployeeWorkDay expectedpersitedEmployeeWorkDay = createWorkDay();
-		expectedpersitedEmployeeWorkDay.setId(1);
+		Employee employee = EmployeeTestUtil.createEmployee();
+		
+		EmployeeWorkDay expectedEmployeeWorkDay = createWorkDay(employee);
+		expectedEmployeeWorkDay.setId(1);
 
 		Mockito.when(employeeWorkDayRepository.findByEmployeeAndCreatedAtBetween(Mockito.any(), Mockito.any(),
 				Mockito.any())).thenReturn(null);
 
-		Mockito.when(employeeWorkDayRepository.save(employeeWorkDay)).thenReturn(expectedpersitedEmployeeWorkDay);
+		Mockito.when(employeeWorkDayRepository.save(expectedEmployeeWorkDay)).thenReturn(expectedEmployeeWorkDay);
 
-		EmployeeWorkDay actualpersitedEmployeeWorkDay = employeeWorkDayService.createIfNotExist(employeeWorkDay);
+		EmployeeWorkDay actualWorkDay = employeeWorkDayService.createIfNotExist(expectedEmployeeWorkDay);
 
-		assertEquals(expectedpersitedEmployeeWorkDay.getId(), actualpersitedEmployeeWorkDay.getId());
+		assertEquals(expectedEmployeeWorkDay.getId(), actualWorkDay.getId());
 	}
 
 	@Test
 	public void it_should_get_work_day() {
 
-		EmployeeWorkDay expectedpersitedEmployeeWorkDay = createWorkDay();
-		expectedpersitedEmployeeWorkDay.setId(1);
+		Employee employee = EmployeeTestUtil.createEmployee();
+		EmployeeWorkDay expectedEmployeeWorkDay = createWorkDay(employee);
+		expectedEmployeeWorkDay.setId(1);
 
 		Mockito.when(employeeWorkDayRepository.findByEmployeeAndCreatedAtBetween(Mockito.any(), Mockito.any(),
-				Mockito.any())).thenReturn(Arrays.asList(expectedpersitedEmployeeWorkDay));
+				Mockito.any())).thenReturn(Arrays.asList(expectedEmployeeWorkDay));
 
-		Employee employee = expectedpersitedEmployeeWorkDay.getEmployee();
-		Date createdAt = expectedpersitedEmployeeWorkDay.getCreatedAt();
+		Employee expectedEmployee = expectedEmployeeWorkDay.getEmployee();
+		Date expectedCreatedAt = expectedEmployeeWorkDay.getCreatedAt();
 
 		EmployeeWorkDay actualpersitedEmployeeWorkDay = employeeWorkDayService.getByEmployeeAndDate(
-				employee, createdAt);
+				expectedEmployee, expectedCreatedAt);
 
-		assertEquals(expectedpersitedEmployeeWorkDay.getId(), actualpersitedEmployeeWorkDay.getId());
+		assertEquals(expectedEmployeeWorkDay.getId(), actualpersitedEmployeeWorkDay.getId());
 	}
 	
 	@Test
 	public void it_should_get_work_month() {
 
+		Employee employee = EmployeeTestUtil.createEmployee();
+		
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.YEAR, 2019);
 		calendar.set(Calendar.MONTH, 10);
 		calendar.set(Calendar.DAY_OF_MONTH, 1);
 		
-		EmployeeWorkDay ewd1 = createWorkDay();
+		EmployeeWorkDay ewd1 = createWorkDay(employee);
 		ewd1.setId(1);
 		ewd1.setCreatedAt(calendar.getTime());
 
 		calendar.add(Calendar.DAY_OF_MONTH, 2);
 		
-		EmployeeWorkDay ewd2 = createWorkDay();
-		ewd2.setId(1);
+		EmployeeWorkDay ewd2 = createWorkDay(employee);
+		ewd2.setId(2);
 		ewd2.setCreatedAt(calendar.getTime());
 		
 		calendar.add(Calendar.MONTH, -1);
 		
-		EmployeeWorkDay ewd3 = createWorkDay();
-		ewd3.setId(1);
+		EmployeeWorkDay ewd3 = createWorkDay(employee);
+		ewd3.setId(3);
 		ewd3.setCreatedAt(calendar.getTime());
 		
 		Mockito.when(employeeWorkDayRepository.findByEmployeeAndCreatedAtBetween(Mockito.any(), Mockito.any(),
 				Mockito.any())).thenReturn(Arrays.asList(ewd1, ewd2));
-
 		
-		Date createdAt = ewd1.getCreatedAt();
-		Employee employee = ewd1.getEmployee();
+		Date dateMonth = ewd1.getCreatedAt();
 		
-		List<EmployeeWorkDay> byEmployeeAndMonth = employeeWorkDayService.getByEmployeeAndMonth(employee, createdAt);
+		List<EmployeeWorkDay> byEmployeeAndMonth = employeeWorkDayService.getByEmployeeAndMonth(employee, dateMonth);
 
 		assertEquals(ewd1.getId(), byEmployeeAndMonth.get(0).getId());
 		assertEquals(ewd2.getId(), byEmployeeAndMonth.get(1).getId());
 	}
 
-	private EmployeeWorkDay createWorkDay() {
-
-		Employee employee = new Employee();
-		employee.setId("12345678910");
-		employee.setName("Marcos");
+	private EmployeeWorkDay createWorkDay(Employee employee) {
 
 		Date date = new Date();
 

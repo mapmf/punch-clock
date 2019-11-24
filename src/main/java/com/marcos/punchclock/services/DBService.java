@@ -3,6 +3,7 @@ package com.marcos.punchclock.services;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,21 +32,29 @@ public class DBService {
 	@Autowired
 	private BCryptPasswordEncoder pe;
 
-	public void populateDevDatabase() {
+	public void populateProdDatabase() {
 		
 		Employee e = new Employee("admin", "Administrator", pe.encode("admin"));
 		e.addProfile(Profile.ADMIN);
 		
-		employeeRepository.saveAll(Arrays.asList(e));
+		Optional<Employee> existingAdmin = employeeRepository.findById(e.getId());
+		
+		if(!existingAdmin.isPresent()) {
+			employeeRepository.save(e);
+		}
+		
 	}
 	
-	public void populateTestDataBase() {
+	public void populateDevDataBase() {
 
+		Employee admin = new Employee("admin", "Administrator", pe.encode("admin"));
+		admin.addProfile(Profile.ADMIN);
+		
 		Employee e1 = new Employee("12345678910", "Bruce", pe.encode("123"));
 		Employee e2 = new Employee("12345678911", "Clarck", pe.encode("123"));
 		Employee e3 = new Employee("12345678912", "Diana", pe.encode("123"));
 
-		employeeRepository.saveAll(Arrays.asList(e1, e2, e3));
+		employeeRepository.saveAll(Arrays.asList(admin, e1, e2, e3));
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.HOUR, 8);

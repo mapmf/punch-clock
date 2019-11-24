@@ -25,7 +25,7 @@ public class DevConfig {
 			return false;
 		}
 		
-		dbService.populateDevDatabase();
+		dbService.populateDevDataBase();
 		
 		return true;
 	}

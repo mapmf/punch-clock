@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.marcos.punchclock.model.Employee;
 import com.marcos.punchclock.repositories.EmployeeRepository;
+import com.marcos.punchclock.util.EmployeeTestUtil;
 
 @DataJpaTest
 public class EmployeeRepositoryTest {
@@ -18,15 +19,13 @@ public class EmployeeRepositoryTest {
 	@Test
 	public void it_should_save_employee() {
 		
-		Employee employee = new Employee();
-		employee.setId("12345678910");
-		employee.setName("Marcos");
+		Employee expectedEmployee = EmployeeTestUtil.createEmployee();
 		
-		employee = employeeRepository.save(employee);
+		expectedEmployee = employeeRepository.save(expectedEmployee);
 		
-		Employee persistedEmployee = employeeRepository.findById(employee.getId()).get();
+		Employee actualEmployee = employeeRepository.findById(expectedEmployee.getId()).get();
 		
-		assertEquals(employee, persistedEmployee);
+		assertEquals(expectedEmployee, actualEmployee);
 	}
 	
 }

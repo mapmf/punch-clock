@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import com.marcos.punchclock.model.Employee;
 import com.marcos.punchclock.model.EmployeeWorkDay;
 import com.marcos.punchclock.util.DateUtil;
+import com.marcos.punchclock.util.EmployeeTestUtil;
 
 @DataJpaTest
 public class EmployeeWorkDayRepositoryTest {
@@ -25,46 +26,44 @@ public class EmployeeWorkDayRepositoryTest {
 	@Test
 	public void it_should_save_work_day() {
 
-		EmployeeWorkDay employeeWorkDay = createWorkDay();
+		Employee expectedEmployee = EmployeeTestUtil.createEmployee();
+		
+		EmployeeWorkDay expectedEmployeeWorkDay = createWorkDay(expectedEmployee);
 
-		Employee employee = employeeWorkDay.getEmployee();
-		Date createdAt = employeeWorkDay.getCreatedAt();
+		Date expectedCreatedAt = expectedEmployeeWorkDay.getCreatedAt();
 
-		EmployeeWorkDay persistedEmployeeWorkDay = employeeWorkDayRepository.save(employeeWorkDay);
+		EmployeeWorkDay actualEmployeeWorkDay = employeeWorkDayRepository.save(expectedEmployeeWorkDay);
 
-		assertEquals(employee, persistedEmployeeWorkDay.getEmployee());
-		assertEquals(createdAt, persistedEmployeeWorkDay.getCreatedAt());
-		assertNotNull(persistedEmployeeWorkDay.getId());
+		assertEquals(expectedEmployee.getId(), actualEmployeeWorkDay.getEmployee().getId());
+		assertEquals(expectedCreatedAt, actualEmployeeWorkDay.getCreatedAt());
+		assertNotNull(actualEmployeeWorkDay.getId());
 
 	}
 
 	@Test
 	public void it_should_get_current_work_day() {
 
-		EmployeeWorkDay employeeWorkDay = createWorkDay();
+		Employee expectedEmployee = EmployeeTestUtil.createEmployee();
+		
+		EmployeeWorkDay expectedEmployeeWorkDay = createWorkDay(expectedEmployee);
 
-		employeeWorkDayRepository.save(employeeWorkDay);
+		Date expectedCreatedAt = expectedEmployeeWorkDay.getCreatedAt();
 
-		Employee employee = employeeWorkDay.getEmployee();
-		Date createdAt = employeeWorkDay.getCreatedAt();
+		Date beginOfDay = DateUtil.getBeginOfDay(expectedCreatedAt);
+		Date endOfDay = DateUtil.getEndOfDay(expectedCreatedAt);
+		
+		employeeWorkDayRepository.save(expectedEmployeeWorkDay);
 
-		Date beginOfDay = DateUtil.getBeginOfDay(createdAt);
-		Date endOfDay = DateUtil.getEndOfDay(createdAt);
+		EmployeeWorkDay actualEmployeeWorkDay = employeeWorkDayRepository
+				.findByEmployeeAndCreatedAtBetween(expectedEmployee, beginOfDay, endOfDay).get(0);
 
-		EmployeeWorkDay persistedEmployeeWorkDay = employeeWorkDayRepository
-				.findByEmployeeAndCreatedAtBetween(employee, beginOfDay, endOfDay).get(0);
-
-		assertEquals(employee, persistedEmployeeWorkDay.getEmployee());
-		assertEquals(createdAt, persistedEmployeeWorkDay.getCreatedAt());
-		assertNotNull(persistedEmployeeWorkDay.getId());
+		assertEquals(expectedEmployee.getId(), actualEmployeeWorkDay.getEmployee().getId());
+		assertEquals(expectedCreatedAt, actualEmployeeWorkDay.getCreatedAt());
+		assertNotNull(actualEmployeeWorkDay.getId());
 
 	}
 
-	private EmployeeWorkDay createWorkDay() {
-
-		Employee employee = new Employee();
-		employee.setId("12345678910");
-		employee.setName("Marcos");
+	private EmployeeWorkDay createWorkDay(Employee employee) {
 
 		employee = employeeRepository.save(employee);
 

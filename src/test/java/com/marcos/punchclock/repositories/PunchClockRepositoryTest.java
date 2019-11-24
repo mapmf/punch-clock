@@ -1,6 +1,6 @@
 package com.marcos.punchclock.repositories;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Date;
 
@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.marcos.punchclock.model.Employee;
 import com.marcos.punchclock.model.PunchClock;
+import com.marcos.punchclock.util.EmployeeTestUtil;
 
 @DataJpaTest
 public class PunchClockRepositoryTest {
@@ -27,15 +28,15 @@ public class PunchClockRepositoryTest {
 
 		Employee employee = persistEmployee();
 
-		PunchClock punchClock = new PunchClock();
-		punchClock.setEmployee(employee);
-		punchClock.setDate(now);
+		PunchClock expectedPunchClock = new PunchClock();
+		expectedPunchClock.setEmployee(employee);
+		expectedPunchClock.setDate(now);
 
-		punchClock = punchClockRepository.save(punchClock);
+		punchClockRepository.save(expectedPunchClock);
 
-		PunchClock persistedPunchClock = punchClockRepository.findById(punchClock.getId()).get();
+		PunchClock actualPunchClock = punchClockRepository.findById(expectedPunchClock.getId()).get();
 
-		assertEquals(punchClock, persistedPunchClock);
+		assertNotNull(actualPunchClock);
 	}
 
 	@Test
@@ -46,23 +47,21 @@ public class PunchClockRepositoryTest {
 
 		Employee employee = persistEmployee();
 
-		PunchClock punchClock = new PunchClock();
-		punchClock.setEmployee(employee);
-		punchClock.setDate(startDate);
+		PunchClock expectedPunchClock = new PunchClock();
+		expectedPunchClock.setEmployee(employee);
+		expectedPunchClock.setDate(startDate);
 
-		punchClock = punchClockRepository.save(punchClock);
+		punchClockRepository.save(expectedPunchClock);
 
-		PunchClock persitedPunchClock = punchClockRepository.findByEmployeeAndDateBetween(employee, startDate, endDate);
+		PunchClock actualPunchClock = punchClockRepository.findByEmployeeAndDateBetween(employee, startDate, endDate);
 		
-		assertEquals(punchClock, persitedPunchClock);
+		assertNotNull(actualPunchClock);
 	}
 
 	private Employee persistEmployee() {
 
-		Employee employee = new Employee();
-		employee.setName("Oliver");
-		employee.setId("12345678910");
-
+		Employee employee = EmployeeTestUtil.createEmployee();
+		
 		employee = employeeRepository.save(employee);
 		
 		return employee;

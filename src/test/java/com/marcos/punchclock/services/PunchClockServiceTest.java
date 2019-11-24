@@ -17,6 +17,7 @@ import com.marcos.punchclock.model.EmployeeWorkDay;
 import com.marcos.punchclock.model.PunchClock;
 import com.marcos.punchclock.repositories.PunchClockRepository;
 import com.marcos.punchclock.services.exceptions.InvalidPuchClockException;
+import com.marcos.punchclock.util.EmployeeTestUtil;
 
 @SpringBootTest
 public class PunchClockServiceTest {
@@ -33,20 +34,22 @@ public class PunchClockServiceTest {
 	@Test
 	public void it_should_save_punch_clock() {
 
-		PunchClock punchClock = new PunchClock();
+		PunchClock expectedPunchClock = new PunchClock();
 
 		Mockito.when(punchClockRepository.findByEmployeeAndDateBetween(Mockito.any(), Mockito.any(), Mockito.any()))
 				.thenReturn(null);
 
-		Mockito.when(punchClockRepository.save(punchClock)).thenReturn(punchClock);
+		Mockito.when(punchClockRepository.save(expectedPunchClock)).thenReturn(expectedPunchClock);
+
+		Employee employee = EmployeeTestUtil.createEmployee();
 		
-		EmployeeWorkDay workDay = createWorkDay();
+		EmployeeWorkDay workDay = createWorkDay(employee);
 		
 		Mockito.when(employeeWorkDayService.createIfNotExist(workDay)).thenReturn(workDay);
 
-		PunchClock persistedPunchClock = punchClockService.insert(punchClock);
+		PunchClock actualPunchClock = punchClockService.insert(expectedPunchClock);
 
-		assertEquals(punchClock, persistedPunchClock);
+		assertEquals(expectedPunchClock, actualPunchClock);
 	}
 
 	@Test
@@ -54,7 +57,7 @@ public class PunchClockServiceTest {
 
 		try {
 
-			Employee employee = createEmployee();
+			Employee employee = EmployeeTestUtil.createEmployee();
 
 			Calendar calendar = Calendar.getInstance();
 
@@ -86,20 +89,8 @@ public class PunchClockServiceTest {
 			// Success
 		}
 
-	}
-
-	private Employee createEmployee() {
-
-		Employee employee = new Employee();
-		employee.setName("Oliver");
-		employee.setId("12345678910");
-
-		return employee;
-	}
-	
-	private EmployeeWorkDay createWorkDay() {
-
-		Employee employee = createEmployee();
+	}	
+	private EmployeeWorkDay createWorkDay(Employee employee) {
 
 		Date date = new Date();
 
