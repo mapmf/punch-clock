@@ -3,7 +3,6 @@ package com.marcos.punchclock.config;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
@@ -37,7 +36,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	private AuthenticationEntryPoint authenticationEntryPoint;
 	
 	@Autowired
-	private UserDetailsServiceImpl userDetailsService; 
+	private UserDetailsServiceImpl userDetailsService;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -66,13 +68,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+		auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
 		
 	}
 	
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+	/*
+	 * @Bean public BCryptPasswordEncoder bCryptPasswordEncoder() { return new
+	 * BCryptPasswordEncoder(); }
+	 */
 	
 }

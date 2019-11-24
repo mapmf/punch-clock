@@ -18,9 +18,9 @@ public class EmployeeService {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
-//TODO fix that
-//	@Autowired
-//	private BCryptPasswordEncoder pe;
+
+	@Autowired
+	private BCryptPasswordEncoder pe;
 	
 	public Employee getById(String id) {
 
@@ -47,7 +47,6 @@ public class EmployeeService {
 
 	public Employee fromDTO(EmployeeDTO dto) {
 
-		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
 		return new Employee(dto.getId(), dto.getName(), pe .encode(dto.getPassword()));
 
 	}
