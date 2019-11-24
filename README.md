@@ -10,6 +10,7 @@ restart server turn **spring.jpa.hibernate.ddl-auto** to **none**
 Besides it's necessary have a database called punch_clock in a MySQL instance
 
 To run application with production mode turn **spring.profiles.active** to **prod** in application.properties
+
 Besides it's necessary have a database called punch_clock_prod in a MySQL instance
 
 A admin user will be available with username=**admin** and password=**admin**
