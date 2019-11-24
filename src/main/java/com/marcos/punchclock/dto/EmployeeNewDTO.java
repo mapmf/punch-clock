@@ -9,6 +9,8 @@ import org.hibernate.validator.constraints.Length;
 
 import com.marcos.punchclock.model.Employee;
 
+import br.com.caelum.stella.bean.validation.NIT;
+
 /**
  *
  * A data transfer object for Employee class
@@ -21,11 +23,12 @@ public class EmployeeNewDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+	@NIT
 	@NotEmpty(message = "PIS is required")
 	private String id;
 	
 	@NotNull(message = "Name is required")
-	@Length(min = 5)
+	@Length(min = 3)
 	private String name;
 	
 	@NotEmpty(message = "Password is required")
