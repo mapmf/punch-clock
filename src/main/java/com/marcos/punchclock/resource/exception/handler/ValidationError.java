@@ -3,6 +3,14 @@ package com.marcos.punchclock.resource.exception.handler;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * This class serializes a fieldErrorList 
+ * 
+ * @author Marcos André
+ *
+ */
+
 public class ValidationError extends StandardError{
 
 	private static final long serialVersionUID = 1L;
