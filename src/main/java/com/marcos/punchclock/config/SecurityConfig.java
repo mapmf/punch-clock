@@ -15,6 +15,13 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 
 import com.marcos.punchclock.services.UserDetailsServiceImpl;
 
+/**
+ * This class configures the security of the application
+ * 
+ * @author Marcos André
+ *
+ */
+
 
 @Configuration
 @EnableWebSecurity
@@ -66,10 +73,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
 		
 	}
-	
-	/*
-	 * @Bean public BCryptPasswordEncoder bCryptPasswordEncoder() { return new
-	 * BCryptPasswordEncoder(); }
-	 */
 	
 }

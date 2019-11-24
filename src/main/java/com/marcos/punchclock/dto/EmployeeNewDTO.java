@@ -9,6 +9,14 @@ import org.hibernate.validator.constraints.Length;
 
 import com.marcos.punchclock.model.Employee;
 
+/**
+ *
+ * A data transfer object for Employee class
+ * used to create a new employee
+ *  
+ * @author Marcos André
+ */
+
 public class EmployeeNewDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;

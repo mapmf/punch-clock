@@ -13,6 +13,17 @@ import com.marcos.punchclock.services.exceptions.EmployeeAlreadyExistException;
 import com.marcos.punchclock.services.exceptions.InvalidPuchClockException;
 import com.marcos.punchclock.services.exceptions.ObjectNotFoundException;
 
+/**
+ * 
+ * This class handles exceptions throwned during api requests
+ * 
+ *  Every exception handler return a ResponseEntity of StandardError 
+ *  type to give a more friendly error message
+ * 
+ * @author Marcos André
+ *
+ */
+
 @ControllerAdvice
 public class ResourceExceptionHandler {
 

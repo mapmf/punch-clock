@@ -12,6 +12,14 @@ import com.marcos.punchclock.repositories.EmployeeWorkDayRepository;
 import com.marcos.punchclock.services.exceptions.ObjectNotFoundException;
 import com.marcos.punchclock.util.DateUtil;
 
+/**
+ * 
+ * Service responsible for EmployeeWorkDay management
+ * 
+ * @author Marcos André
+ *
+ */
+
 @Service
 public class EmployeeWorkDayService {
 

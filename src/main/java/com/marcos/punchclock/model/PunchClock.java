@@ -13,6 +13,14 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * 
+ * This class represents a punch clock of a employee
+ * 
+ * @author Marcos André
+ *
+ */
+
 @Entity
 public class PunchClock implements Serializable{
 	

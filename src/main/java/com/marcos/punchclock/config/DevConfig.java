@@ -8,6 +8,13 @@ import org.springframework.context.annotation.Profile;
 
 import com.marcos.punchclock.services.DBService;
 
+/**
+ * This class manages beans that will 
+ * initialized with development profile
+ *
+ * @author Marcos André
+ */
+
 @Configuration
 @Profile("dev")
 public class DevConfig {

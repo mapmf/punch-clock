@@ -18,6 +18,14 @@ import com.marcos.punchclock.model.util.EmployeeHoursFormatterUtil;
 import com.marcos.punchclock.model.util.PunchClockRestTime;
 import com.marcos.punchclock.model.util.WorkingPunchClockInterval;
 
+/**
+ * 
+ * This class groups a set of employee punch clock of a day 
+ * 
+ * @author Marcos André
+ *
+ */
+
 @Entity
 public class EmployeeWorkDay implements Serializable {
 

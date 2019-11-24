@@ -8,6 +8,16 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.marcos.punchclock.model.EmployeeWorkDay;
 import com.marcos.punchclock.model.util.EmployeeHoursFormatterUtil;
 
+/**
+ * 
+ * This class is a data transfer object that groups 
+ * EmployeeWorkDay objects by month
+ * 
+ * @see EmployeeWorkDay
+ * 
+ * @author Marcos André
+ */
+
 public class EmployeeWorkMonthDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;

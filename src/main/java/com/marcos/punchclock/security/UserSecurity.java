@@ -10,6 +10,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.marcos.punchclock.model.enums.Profile;
 
+/**
+ * This class is a UserDetails implementation. 
+ * That is useful to get a Employee object and convert
+ * to a user that Spring Boot knows
+ * 
+ * @author Marcos André
+ *
+ */
+
 public class UserSecurity implements UserDetails {
 
 	private static final long serialVersionUID = 1L;

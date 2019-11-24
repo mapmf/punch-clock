@@ -17,6 +17,15 @@ import com.marcos.punchclock.repositories.EmployeeRepository;
 import com.marcos.punchclock.repositories.EmployeeWorkDayRepository;
 import com.marcos.punchclock.repositories.PunchClockRepository;
 
+/**
+ * 
+ * Service responsible for populate database according
+ * to defined profile
+ * 
+ * @author Marcos André
+ *
+ */
+
 @Service
 public class DBService {
 

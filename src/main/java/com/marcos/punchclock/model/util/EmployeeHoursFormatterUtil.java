@@ -1,5 +1,16 @@
 package com.marcos.punchclock.model.util;
 
+/**
+ * This class formats a given hours to a more friendly string 
+ * 
+ * Example:
+ * 
+ * EmployeeHoursFormatterUtil.format(0.25) will return 0:15
+ * because 15 minutes are equivalent a 0.25 hours 
+ * 	
+ * @author Marcos André
+ */
+
 public class EmployeeHoursFormatterUtil {
 
 	public static String format(Double hours) {

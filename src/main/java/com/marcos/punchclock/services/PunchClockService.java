@@ -13,6 +13,14 @@ import com.marcos.punchclock.model.PunchClock;
 import com.marcos.punchclock.repositories.PunchClockRepository;
 import com.marcos.punchclock.services.exceptions.InvalidPuchClockException;
 
+/**
+ * 
+ * Service responsible for PunchClock management
+ * 
+ * @author Marcos André
+ *
+ */
+
 @Service
 public class PunchClockService {
 

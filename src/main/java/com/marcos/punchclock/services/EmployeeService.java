@@ -13,6 +13,14 @@ import com.marcos.punchclock.repositories.EmployeeRepository;
 import com.marcos.punchclock.services.exceptions.ObjectNotFoundException;
 import com.marcos.punchclock.services.exceptions.EmployeeAlreadyExistException;
 
+/**
+ * 
+ * Service responsible for Employee management
+ * 
+ * @author Marcos André
+ *
+ */
+
 @Service
 public class EmployeeService {
 

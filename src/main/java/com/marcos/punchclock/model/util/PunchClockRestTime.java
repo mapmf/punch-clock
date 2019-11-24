@@ -4,6 +4,16 @@ import java.util.Date;
 
 import com.marcos.punchclock.util.DateUtil;
 
+/**
+ * 
+ * This class checks if interval between
+ * outDate of working interval and time of employee return
+ * is a valid rest time 
+ * 
+ * @author Marcos André
+ *
+ */
+
 public class PunchClockRestTime {
 
 	private static final double NO_REST_NEEDED = 4;

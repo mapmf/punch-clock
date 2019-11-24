@@ -10,6 +10,14 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
+/**
+ * 
+ * This classe handles authentication exception
+ * 
+ * @author Marcos André
+ *
+ */
+
 @Component
 public class AuthenticationEntryPoint extends BasicAuthenticationEntryPoint{
 

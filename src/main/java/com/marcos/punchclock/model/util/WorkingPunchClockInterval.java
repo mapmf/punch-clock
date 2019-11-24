@@ -8,6 +8,14 @@ import java.util.Date;
 import com.marcos.punchclock.model.PunchClock;
 import com.marcos.punchclock.util.DateUtil;
 
+/**
+ * 
+ * This class calculates the employee hours of work
+ * 
+ * @author Marcos André
+ *
+ */
+
 public class WorkingPunchClockInterval {
 
 	private static final int NUMBER_OF_DECIMALS = 2;

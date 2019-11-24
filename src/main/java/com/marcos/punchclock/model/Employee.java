@@ -15,6 +15,14 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marcos.punchclock.model.enums.Profile;
 
+/**
+ * This class represents employees
+ * 
+ * @author Marcos André
+ *
+ */
+
+
 @Entity
 public class Employee {
 	@Id

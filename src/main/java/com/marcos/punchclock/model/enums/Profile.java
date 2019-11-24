@@ -1,5 +1,12 @@
 package com.marcos.punchclock.model.enums;
 
+/**
+ * This enum represents User roles of application
+ * 
+ * @author Marcos André
+ *
+ */
+
 public enum Profile {
 	USER(1, "ROLE_USER"),
 	ADMIN(2, "ROLE_ADMIN");
