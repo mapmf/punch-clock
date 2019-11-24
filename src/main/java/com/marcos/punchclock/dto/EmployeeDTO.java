@@ -1,0 +1,59 @@
+package com.marcos.punchclock.dto;
+
+import java.io.Serializable;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
+import com.marcos.punchclock.model.Employee;
+
+public class EmployeeDTO implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
+	@NotEmpty(message = "PIS is required")
+	private String id;
+	
+	@NotNull(message = "Name is required")
+	@Length(min = 5)
+	private String name;
+	
+	@NotEmpty(message = "Password is required")
+	private String password;
+	
+	public EmployeeDTO() {}
+	
+	public EmployeeDTO(Employee employee) {
+
+		this.id = employee.getId();
+		this.name = employee.getName();
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
+}

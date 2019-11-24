@@ -62,7 +62,7 @@ public class EmployeeWorkDayService {
 				startDate, endDate);
 
 		if (workDays.isEmpty()) {
-			throw new ObjectNotFoundException("No workdays existin in interval of " + startDate + " and " + endDate);
+			throw new ObjectNotFoundException("No workdays existing in interval of " + startDate + " and " + endDate);
 		}
 
 		return workDays;

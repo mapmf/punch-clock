@@ -43,6 +43,26 @@ public class DateUtil {
 		return calendar.getTime();
 	}
 	
+	public static Date getMonthDate(int month, int year) {
+		
+		Date now = new Date();
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(now);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		
+		if(month > 0) {
+			calendar.set(Calendar.MONTH, month);
+		}
+		
+		if(year > 0) {
+			calendar.set(Calendar.YEAR, year);
+		}
+		
+		return calendar.getTime();
+	}
+	
 	public static Date getEndOfMonth(Date date) {
 		
 		Calendar calendar = Calendar.getInstance();

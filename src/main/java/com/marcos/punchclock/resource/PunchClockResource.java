@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,9 +13,10 @@ import com.marcos.punchclock.model.Employee;
 import com.marcos.punchclock.model.PunchClock;
 import com.marcos.punchclock.services.EmployeeService;
 import com.marcos.punchclock.services.PunchClockService;
+import com.marcos.punchclock.services.UserService;
 
 @RestController
-@RequestMapping("/punch-clock")
+@RequestMapping("/punch-clocks")
 public class PunchClockResource {
 
 	@Autowired
@@ -24,12 +25,17 @@ public class PunchClockResource {
 	@Autowired
 	private EmployeeService employeeService;
 	
-	@PostMapping("/{employee-id}")
-	public ResponseEntity<Void> add(@PathVariable("employee-id") String employeePis){
+	@Autowired
+	private UserService userService;
+	
+	@PostMapping
+	public ResponseEntity<Void> add(){
 	
 		Date now = new Date();
 		
-		Employee employee = employeeService.getByPis(employeePis);
+		UserDetails userDetails = userService.authenticated();
+		
+		Employee employee = employeeService.getById(userDetails.getUsername());
 		
 		PunchClock newPunchClock = new PunchClock();
 		newPunchClock.setDate(now);

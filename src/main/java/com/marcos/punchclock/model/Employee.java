@@ -11,8 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marcos.punchclock.model.enums.Profile;
@@ -22,13 +20,12 @@ public class Employee {
 	@Id
 	private String id;
 
-	@NotEmpty(message = "Name is required")
 	private String name;
 
 	@JsonIgnore
-	@NotNull(message = "Password is required")
 	private String password;
 
+	@JsonIgnore
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "profiles")
 	private Set<Integer> profileIds = new HashSet<Integer>();

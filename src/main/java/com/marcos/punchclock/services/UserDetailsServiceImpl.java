@@ -18,7 +18,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String pis) throws UsernameNotFoundException {
 		
-		Employee employee = employeeService.getByPis(pis);
+		Employee employee = employeeService.getById(pis);
 		
 		if(employee == null) {
 			 throw new UsernameNotFoundException(pis);
