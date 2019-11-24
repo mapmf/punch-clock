@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,10 +25,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			"/h2-console/**"
 	};
 	
-	private static final String[] AUTHENTICATED_MATCHERS = {
-			"/punch-clock/**",
-			"/employee-work-days/**"
+	private static final String[] PUBLIC_MATCHERS_POST = {
+			"/employees/**"
 	};
+	
 	
 	@Autowired
 	private Environment environment;
@@ -54,8 +55,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.authenticationEntryPoint(authenticationEntryPoint)
 			.and()
 			.authorizeRequests()
-			.antMatchers(AUTHENTICATED_MATCHERS).authenticated()
+			.antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
 			.antMatchers(PUBLIC_MATCHERS).permitAll()
+			.anyRequest().authenticated()
 			.and()
 			.formLogin();
 	
