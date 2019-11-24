@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
 
 import com.marcos.punchclock.model.Employee;
 
-public class EmployeeDTO implements Serializable{
+public class EmployeeNewDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -23,9 +23,9 @@ public class EmployeeDTO implements Serializable{
 	@NotEmpty(message = "Password is required")
 	private String password;
 	
-	public EmployeeDTO() {}
+	public EmployeeNewDTO() {}
 	
-	public EmployeeDTO(Employee employee) {
+	public EmployeeNewDTO(Employee employee) {
 
 		this.id = employee.getId();
 		this.name = employee.getName();

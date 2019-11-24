@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +33,8 @@ public class EmployeeWorkDayResource {
 
 	@Autowired
 	private UserService userService;
-
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/{employee-id}")
 	public ResponseEntity<EmployeeWorkDay> getWorkDayByEmployeeId(@PathVariable("employee-id") String employeePis,
 			@RequestParam(name = "dateInMilliseconds", defaultValue = "0") Long dateInMilliseconds) {
@@ -73,6 +75,7 @@ public class EmployeeWorkDayResource {
 		return ResponseEntity.ok(workDay);
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/get-by-month/{employee-id}")
 	public ResponseEntity<EmployeeWorkMonthDTO> getWorkDaysByMonthByEmployeeId(
 			@PathVariable("employee-id") String employeePis,

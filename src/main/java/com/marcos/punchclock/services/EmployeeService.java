@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.marcos.punchclock.dto.EmployeeDTO;
+import com.marcos.punchclock.dto.EmployeeNewDTO;
 import com.marcos.punchclock.model.Employee;
 import com.marcos.punchclock.repositories.EmployeeRepository;
 import com.marcos.punchclock.services.exceptions.ObjectNotFoundException;
@@ -45,7 +45,7 @@ public class EmployeeService {
 		return employeeRepository.findAll();
 	}
 
-	public Employee fromDTO(EmployeeDTO dto) {
+	public Employee fromDTO(EmployeeNewDTO dto) {
 
 		return new Employee(dto.getId(), dto.getName(), pe .encode(dto.getPassword()));
 
