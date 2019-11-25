@@ -1,6 +1,7 @@
 package com.marcos.punchclock.security;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +27,10 @@ public class AuthenticationEntryPoint extends BasicAuthenticationEntryPoint{
 			AuthenticationException authException) throws IOException {
 
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        
+        PrintWriter writer = response.getWriter();
+        
+        writer.println("HTTP status 401 - " + authException.getMessage());
 	}
 	
 	@Override
