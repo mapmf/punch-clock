@@ -12,6 +12,7 @@ import com.marcos.punchclock.model.EmployeeWorkDay;
 import com.marcos.punchclock.model.PunchClock;
 import com.marcos.punchclock.repositories.PunchClockRepository;
 import com.marcos.punchclock.services.exceptions.InvalidPuchClockException;
+import com.marcos.punchclock.util.DateUtil;
 
 /**
  * 
@@ -33,7 +34,9 @@ public class PunchClockService {
 	@Transactional
 	public PunchClock insert(PunchClock newPunchClock) {
 
-		if (hasPuchClockAddedInLastMinute(newPunchClock)) {
+		Date date = new Date();
+		
+		if (existPunchClockInMinute(newPunchClock, date)) {
 			throw new InvalidPuchClockException("You punched clock less than 1 minute ago");
 		}
 
@@ -46,25 +49,24 @@ public class PunchClockService {
 		
 		newPunchClock.setId(null);
 		newPunchClock.setEmployeeWorkDay(workDay);
+		newPunchClock.setDate(date);
 
 		return punchClockRepository.save(newPunchClock);
 
 	}
 
-	private boolean hasPuchClockAddedInLastMinute(PunchClock newPunchClock) {
+	private boolean existPunchClockInMinute(PunchClock newPunchClock, Date date) {
 
-		Date date = new Date();
-
+		Date previousDate = DateUtil.ignoringSeconds(date);
+		
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		calendar.add(Calendar.MINUTE, -1);
+		calendar.setTime(previousDate);
+		calendar.set(Calendar.SECOND, 59);
 
-		Date previousDate = calendar.getTime();
-
-		newPunchClock.setDate(date);
+		Date limitDate = calendar.getTime();
 
 		PunchClock existingPunchClock = punchClockRepository.findByEmployeeAndDateBetween(newPunchClock.getEmployee(),
-				previousDate, date);
+				previousDate, limitDate);
 
 		return existingPunchClock != null;
 	}
