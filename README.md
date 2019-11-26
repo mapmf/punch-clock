@@ -5,11 +5,11 @@ To run tests please turn **spring.profiles.active** to **test** in application.p
 
 To startup application with preloaded data turn **spring.profiles.active** to **dev** in application.properties
 
-Besides it's necessary have a database called punch_clock in a MySQL instance
+> It's necessary have a database called punch_clock in a MySQL instance
 
 To run application with production mode turn **spring.profiles.active** to **prod** in application.properties
 
-Besides it's necessary have a database called punch_clock_prod in a MySQL instance
+> It's necessary have a database called punch_clock_prod in a MySQL instance
 
 A admin user will be available with username=**admin** and password=**admin**
 
