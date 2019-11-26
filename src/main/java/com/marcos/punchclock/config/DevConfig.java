@@ -28,7 +28,7 @@ public class DevConfig {
 	@Bean
 	public boolean instantiateDatabase() {
 		
-		if(!strategy.equals("create") && !strategy.equals("update")) {
+		if(!strategy.equals("create")) {
 			return false;
 		}
 		
