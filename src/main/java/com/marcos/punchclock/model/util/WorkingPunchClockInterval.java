@@ -1,7 +1,5 @@
 package com.marcos.punchclock.model.util;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -18,7 +16,6 @@ import com.marcos.punchclock.util.DateUtil;
 
 public class WorkingPunchClockInterval {
 
-	private static final int NUMBER_OF_DECIMALS = 2;
 	private static final double SUNDAY = 1;
 	private static final double SATURDAY = 7;
 	private static final int HOUR_TO_START_COUNT_ADDITIONAL_NIGHT = 22;
@@ -74,10 +71,7 @@ public class WorkingPunchClockInterval {
 			intervalInHours = intervalInHours + calculateAdditionalNight(inDate, outDate);
 		}
 
-		BigDecimal bigDecimal = new BigDecimal(intervalInHours).setScale(NUMBER_OF_DECIMALS, RoundingMode.DOWN);
-
-		return bigDecimal.doubleValue();
-
+		return intervalInHours;
 	}
 
 	public double getBasicIntervalInHours() {
