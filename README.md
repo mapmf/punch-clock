@@ -1,5 +1,5 @@
 # Punch Clock
-A Rest API to manage employee's clocks
+A Rest API to manage employee's clocks developed with Spring Boot
 
 To run tests please turn **spring.profiles.active** to **test** in application.properties first
 
