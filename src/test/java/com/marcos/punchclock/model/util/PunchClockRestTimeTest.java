@@ -28,7 +28,7 @@ public class PunchClockRestTimeTest {
 		
 		Date returnDate = calendar.getTime();
 		
-		double intervalInMinutes = 240.0;
+		long intervalInMinutes = 240;
 
 		WorkingPunchClockInterval interval = Mockito.mock(WorkingPunchClockInterval.class);
 		Mockito.when(interval.getOutDate()).thenReturn(outDate);
@@ -56,7 +56,7 @@ public class PunchClockRestTimeTest {
 		
 		Date returnDate = calendar.getTime();
 		
-		double intervalInMinutes = 300.0;
+		long intervalInMinutes = 300;
 
 		WorkingPunchClockInterval interval = Mockito.mock(WorkingPunchClockInterval.class);
 		Mockito.when(interval.getOutDate()).thenReturn(outDate);
@@ -83,7 +83,7 @@ public class PunchClockRestTimeTest {
 		
 		Date returnDate = calendar.getTime();
 		
-		double intervalInMinutes = 300.0;
+		long intervalInMinutes = 300;
 
 		WorkingPunchClockInterval interval = Mockito.mock(WorkingPunchClockInterval.class);
 		Mockito.when(interval.getOutDate()).thenReturn(outDate);
@@ -110,7 +110,7 @@ public class PunchClockRestTimeTest {
 		
 		Date returnDate = calendar.getTime();
 		
-		double intervalInMinutes = 420.0;
+		long intervalInMinutes = 420;
 
 		WorkingPunchClockInterval interval = Mockito.mock(WorkingPunchClockInterval.class);
 		Mockito.when(interval.getOutDate()).thenReturn(outDate);
@@ -137,7 +137,7 @@ public class PunchClockRestTimeTest {
 		
 		Date returnDate = calendar.getTime();
 		
-		double intervalInMinutes = 420.0;
+		long intervalInMinutes = 420;
 
 		WorkingPunchClockInterval interval = Mockito.mock(WorkingPunchClockInterval.class);
 		Mockito.when(interval.getOutDate()).thenReturn(outDate);
