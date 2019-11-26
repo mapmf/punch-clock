@@ -35,9 +35,9 @@ public class PunchClockIntervalTest {
 		
 		WorkingPunchClockInterval interval = new WorkingPunchClockInterval(inPunchClock, outPunchClock);
 		
-		double expected = 6;
+		double expected = 360;
 		
-		double actual = interval.calculateHours();
+		double actual = interval.calculateMinutes();
 		
 		assertEquals(expected, actual);
 	}
@@ -64,9 +64,9 @@ public class PunchClockIntervalTest {
 		
 		WorkingPunchClockInterval interval = new WorkingPunchClockInterval(inPunchClock, outPunchClock);
 		
-		double expected = 9;
+		double expected = 540;
 		
-		double actual = interval.calculateHours();
+		double actual = interval.calculateMinutes();
 		
 		assertEquals(expected, actual);
 	}
@@ -93,9 +93,9 @@ public class PunchClockIntervalTest {
 		
 		WorkingPunchClockInterval interval = new WorkingPunchClockInterval(inPunchClock, outPunchClock);
 		
-		double expected = 12;
+		double expected = 720;
 		
-		double actual = interval.calculateHours();
+		double actual = interval.calculateMinutes();
 		
 		assertEquals(expected, actual);
 	}
@@ -124,8 +124,8 @@ public class PunchClockIntervalTest {
 		WorkingPunchClockInterval interval = new WorkingPunchClockInterval(inPunchClock, outPunchClock);
 		
 		int delta = 2;
-		double expected = 7.2;
-		double actual = interval.calculateHours();
+		double expected = 432;
+		double actual = interval.calculateMinutes();
 		
 		assertEquals(expected, actual, delta);
 	}

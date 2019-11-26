@@ -19,18 +19,20 @@ public class PunchClockRestTimeTest {
 	public void it_should_no_need_rest_time() {
 		
 		Calendar calendar = Calendar.getInstance();
-
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		
 		Date outDate = calendar.getTime();
 		
 		calendar.add(Calendar.SECOND, 1);
 		
 		Date returnDate = calendar.getTime();
 		
-		double intervalInHours = 4.0;
+		double intervalInMinutes = 240.0;
 
 		WorkingPunchClockInterval interval = Mockito.mock(WorkingPunchClockInterval.class);
 		Mockito.when(interval.getOutDate()).thenReturn(outDate);
-		Mockito.when(interval.getBasicIntervalInHours()).thenReturn(intervalInHours);
+		Mockito.when(interval.getBasicIntervalInMinutes()).thenReturn(intervalInMinutes);
 		
 		PunchClock returnPunchClock = Mockito.mock(PunchClock.class);
 		Mockito.when(returnPunchClock.getDate()).thenReturn(returnDate);
@@ -45,18 +47,20 @@ public class PunchClockRestTimeTest {
 	public void it_should_need_rest_time_of_a_quarter_of_hour_but_dont_have_it() {
 
 		Calendar calendar = Calendar.getInstance();
-
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		
 		Date outDate = calendar.getTime();
 		
 		calendar.add(Calendar.SECOND, 1);
 		
 		Date returnDate = calendar.getTime();
 		
-		double intervalInHours = 5.0;
+		double intervalInMinutes = 300.0;
 
 		WorkingPunchClockInterval interval = Mockito.mock(WorkingPunchClockInterval.class);
 		Mockito.when(interval.getOutDate()).thenReturn(outDate);
-		Mockito.when(interval.getBasicIntervalInHours()).thenReturn(intervalInHours);
+		Mockito.when(interval.getBasicIntervalInMinutes()).thenReturn(intervalInMinutes);
 		
 		PunchClock returnPunchClock = Mockito.mock(PunchClock.class);
 		Mockito.when(returnPunchClock.getDate()).thenReturn(returnDate);
@@ -70,18 +74,20 @@ public class PunchClockRestTimeTest {
 	public void it_should_need_rest_time_of_a_quarter_of_hour_and_have_it() {
 
 		Calendar calendar = Calendar.getInstance();
-
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		
 		Date outDate = calendar.getTime();
 		
 		calendar.add(Calendar.MINUTE, 15);
 		
 		Date returnDate = calendar.getTime();
 		
-		double intervalInHours = 5.0;
+		double intervalInMinutes = 300.0;
 
 		WorkingPunchClockInterval interval = Mockito.mock(WorkingPunchClockInterval.class);
 		Mockito.when(interval.getOutDate()).thenReturn(outDate);
-		Mockito.when(interval.getBasicIntervalInHours()).thenReturn(intervalInHours);
+		Mockito.when(interval.getBasicIntervalInMinutes()).thenReturn(intervalInMinutes);
 		
 		PunchClock returnPunchClock = Mockito.mock(PunchClock.class);
 		Mockito.when(returnPunchClock.getDate()).thenReturn(returnDate);
@@ -95,18 +101,20 @@ public class PunchClockRestTimeTest {
 	public void it_should_need_rest_time_of_a_hour_but_dont_have_it() {
 	
 		Calendar calendar = Calendar.getInstance();
-
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		
 		Date outDate = calendar.getTime();
 		
 		calendar.add(Calendar.MINUTE, 15);
 		
 		Date returnDate = calendar.getTime();
 		
-		double intervalInHours = 7.0;
+		double intervalInMinutes = 420.0;
 
 		WorkingPunchClockInterval interval = Mockito.mock(WorkingPunchClockInterval.class);
 		Mockito.when(interval.getOutDate()).thenReturn(outDate);
-		Mockito.when(interval.getBasicIntervalInHours()).thenReturn(intervalInHours);
+		Mockito.when(interval.getBasicIntervalInMinutes()).thenReturn(intervalInMinutes);
 		
 		PunchClock returnPunchClock = Mockito.mock(PunchClock.class);
 		Mockito.when(returnPunchClock.getDate()).thenReturn(returnDate);
@@ -120,18 +128,20 @@ public class PunchClockRestTimeTest {
 	public void it_should_need_rest_time_of_a_hour_and_have_it() {
 		
 		Calendar calendar = Calendar.getInstance();
-
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		
 		Date outDate = calendar.getTime();
 		
 		calendar.add(Calendar.HOUR, 1);
 		
 		Date returnDate = calendar.getTime();
 		
-		double intervalInHours = 7.0;
+		double intervalInMinutes = 420.0;
 
 		WorkingPunchClockInterval interval = Mockito.mock(WorkingPunchClockInterval.class);
 		Mockito.when(interval.getOutDate()).thenReturn(outDate);
-		Mockito.when(interval.getBasicIntervalInHours()).thenReturn(intervalInHours);
+		Mockito.when(interval.getBasicIntervalInMinutes()).thenReturn(intervalInMinutes);
 		
 		PunchClock returnPunchClock = Mockito.mock(PunchClock.class);
 		Mockito.when(returnPunchClock.getDate()).thenReturn(returnDate);

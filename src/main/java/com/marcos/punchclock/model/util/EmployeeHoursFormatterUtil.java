@@ -1,36 +1,43 @@
 package com.marcos.punchclock.model.util;
 
 /**
- * This class formats a given hours to a more friendly string 
+ * This class formats a given minutes to hours in friendly format
  * 
  * Example:
  * 
- * EmployeeHoursFormatterUtil.format(0.25) will return 0:15
- * because 15 minutes are equivalent a 0.25 hours 
+ * EmployeeHoursFormatterUtil.format(420) will return 7:00
+ * because 420 minutes is equivalent to 7 hours 
  * 	
  * @author Marcos André
  */
 
 public class EmployeeHoursFormatterUtil {
 
-	public static String format(Double hours) {
+	public static String format(Double minutes) {
 
 		StringBuilder sb = new StringBuilder();
 
-		int fullHours = hours.intValue();
+		Double fullHours = minutes/60;
 		
-		sb.append(fullHours);
+		sb.append(fullHours.intValue());
 		sb.append(":");
 		
-		Double minutes = (hours - fullHours) * 60;
+		Double rest = minutes % 60;
 		
-		int fullMinutes = minutes.intValue();
+		if(rest == 0) {
+			
+			sb.append("00");
+			
+		} else {
+			
+			if(rest < 10) {
+				
+				sb.append(0);	
+			}
 		
-		if(fullMinutes < 10) {
-			sb.append(0);	
+			sb.append(rest.intValue());
 		}
-		
-		sb.append(fullMinutes);
+
 		
 		return sb.toString();
 

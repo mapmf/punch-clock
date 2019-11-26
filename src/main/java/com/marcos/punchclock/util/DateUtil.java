@@ -77,17 +77,30 @@ public class DateUtil {
 		return calendar.getTime();
 	}
 	
-	public static double getIntervalInHours(Date date1, Date date2) {
+	public static long getIntervalInMinutes(Date date1, Date date2) {
 		
 		double intervalInMiliseconds = getIntervalInMiliseconds(date1, date2);
 		
-		double hourInMiliseconds = 60*60*1000;
+		double minutesInMiliseconds = 60*1000;
 		
-		return intervalInMiliseconds/hourInMiliseconds;
+		Double minutes = intervalInMiliseconds/minutesInMiliseconds;
+		
+		return minutes.longValue();
 		
 	}
 	
-	public static double getIntervalInMiliseconds(Date date1, Date date2) {
+	public static Date ignoringSeconds(Date date) {
+		
+		Calendar calendar = Calendar.getInstance();
+		
+		calendar.setTime(date);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		
+		return calendar.getTime();
+	}
+	
+	public static long getIntervalInMiliseconds(Date date1, Date date2) {
 		
 		return date2.getTime() - date1.getTime();
 		

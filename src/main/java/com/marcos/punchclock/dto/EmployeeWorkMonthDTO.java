@@ -36,17 +36,17 @@ public class EmployeeWorkMonthDTO implements Serializable {
 
 	public String getTotalWorkingHours() {
 
-		double totalWorkingHours = calculateTotalWorkingHours();
+		double totalWorkingMinutes = calculateTotalWorkingMinutes();
 
-		return EmployeeHoursFormatterUtil.format(totalWorkingHours);
+		return EmployeeHoursFormatterUtil.format(totalWorkingMinutes);
 	}
 
-	public double calculateTotalWorkingHours() {
+	public double calculateTotalWorkingMinutes() {
 
 		double total = 0;
 
 		for (EmployeeWorkDay employeeWorkDay : employeeWorkDays) {
-			total += employeeWorkDay.calculateWorkingHours();
+			total += employeeWorkDay.calculateWorkingMinutes();
 		}
 
 		return total;

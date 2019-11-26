@@ -8,7 +8,7 @@ import com.marcos.punchclock.util.DateUtil;
 
 /**
  * 
- * This class calculates the employee hours of work
+ * This class represents the employee work interval
  * 
  * @author Marcos André
  *
@@ -16,20 +16,20 @@ import com.marcos.punchclock.util.DateUtil;
 
 public class WorkingPunchClockInterval {
 
-	private static final double SUNDAY = 1;
-	private static final double SATURDAY = 7;
+	private static final int SUNDAY = 1;
+	private static final int SATURDAY = 7;
 	private static final int HOUR_TO_START_COUNT_ADDITIONAL_NIGHT = 22;
 	private static final int HOUR_TO_END_COUNT_NIGHT_ADDITIONAL = 6;
 	private static final double SATURDAY_MODIFIER = 1.5;
-	private static final double SUNDAY_MODIFIER = 2;
+	private static final int SUNDAY_MODIFIER = 2;
 	private static final double ADDITIONAL_NIGHT_MODIFIER = 0.2;
 
 	private Date inDate;
 	private Date outDate;
 
 	public WorkingPunchClockInterval(PunchClock inPunchClock, PunchClock outPunchClock) {
-		this.inDate = inPunchClock.getDate();
-		this.outDate = outPunchClock.getDate();
+		this.inDate = DateUtil.ignoringSeconds(inPunchClock.getDate());
+		this.outDate = DateUtil.ignoringSeconds(outPunchClock.getDate());
 	}
 
 	public Date getInDate() {
@@ -48,9 +48,9 @@ public class WorkingPunchClockInterval {
 		this.outDate = outDate;
 	}
 
-	public double calculateHours() {
+	public double calculateMinutes() {
 
-		double intervalInHours = getBasicIntervalInHours();
+		double intervalInMinutes = getBasicIntervalInMinutes();
 
 		Calendar calendar = Calendar.getInstance();
 
@@ -60,23 +60,23 @@ public class WorkingPunchClockInterval {
 
 		if (dayOfWeek == SUNDAY) {
 
-			intervalInHours = intervalInHours * SUNDAY_MODIFIER;
+			intervalInMinutes = intervalInMinutes * SUNDAY_MODIFIER;
 
 		} else if (dayOfWeek == SATURDAY) {
 
-			intervalInHours = intervalInHours * SATURDAY_MODIFIER;
+			intervalInMinutes = intervalInMinutes * SATURDAY_MODIFIER;
 
 		} else {
 
-			intervalInHours = intervalInHours + calculateAdditionalNight(inDate, outDate);
+			intervalInMinutes = intervalInMinutes + calculateAdditionalNight(inDate, outDate);
 		}
 
-		return intervalInHours;
+		return intervalInMinutes;
 	}
 
-	public double getBasicIntervalInHours() {
+	public long getBasicIntervalInMinutes() {
 
-		return DateUtil.getIntervalInHours(inDate, outDate);
+		return DateUtil.getIntervalInMinutes(inDate, outDate);
 	}
 
 	private double calculateAdditionalNight(Date start, Date end) {
@@ -111,7 +111,7 @@ public class WorkingPunchClockInterval {
 
 		if (hasNightAdditional) {
 
-			double additionalNightInterval = DateUtil.getIntervalInHours(startNightAdditional, endNightAdditional);
+			long additionalNightInterval = DateUtil.getIntervalInMinutes(startNightAdditional, endNightAdditional);
 
 			additionalNight = additionalNightInterval * ADDITIONAL_NIGHT_MODIFIER;
 		}

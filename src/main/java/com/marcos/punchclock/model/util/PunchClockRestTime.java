@@ -16,10 +16,10 @@ import com.marcos.punchclock.util.DateUtil;
 
 public class PunchClockRestTime {
 
-	private static final double NO_REST_NEEDED = 4;
-	private static final double REST_TIME_OF_A_HOUR_NEEDED = 6;
-	private static final double HOUR = 1;
-	private static final double QUARTER_OF_HOUR = 0.25;
+	private static final double NO_REST_NEEDED = 4*60;
+	private static final double REST_TIME_OF_A_HOUR_NEEDED = 6*60;
+	private static final double HOUR = 60;
+	private static final double QUARTER_OF_HOUR = 15;
 	
 	private WorkingPunchClockInterval interval;
 	private Date returnDate;
@@ -27,21 +27,21 @@ public class PunchClockRestTime {
 	public PunchClockRestTime(WorkingPunchClockInterval interval, Date returnDate) {
 		super();
 		this.interval = interval;
-		this.returnDate = returnDate;
+		this.returnDate = DateUtil.ignoringSeconds(returnDate);
 	}
 
 	public boolean isValidInterval() {
 		
-		double intervalInHours = interval.getBasicIntervalInHours();
+		long intervalInMinutes = interval.getBasicIntervalInMinutes();
 		Date outDate = interval.getOutDate();
 		
-		double restInterval = DateUtil.getIntervalInHours(outDate, returnDate);
+		long restInterval = DateUtil.getIntervalInMinutes(outDate, returnDate);
 		
-		if(intervalInHours <= NO_REST_NEEDED) {
+		if(intervalInMinutes <= NO_REST_NEEDED) {
 		
 			return true;
 			
-		} else if(intervalInHours > NO_REST_NEEDED && intervalInHours < REST_TIME_OF_A_HOUR_NEEDED) {
+		} else if(intervalInMinutes > NO_REST_NEEDED && intervalInMinutes < REST_TIME_OF_A_HOUR_NEEDED) {
 			
 			return restInterval >= QUARTER_OF_HOUR;
 			

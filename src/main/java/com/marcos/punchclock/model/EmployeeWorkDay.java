@@ -88,16 +88,16 @@ public class EmployeeWorkDay implements Serializable {
 
 	public String getWorkingHours() {
 		
-		double workingHours = calculateWorkingHours();
+		double workingMinutes = calculateWorkingMinutes();
 		
-		return EmployeeHoursFormatterUtil.format(workingHours);
+		return EmployeeHoursFormatterUtil.format(workingMinutes);
 	}
 	
-	public double calculateWorkingHours() {
+	public double calculateWorkingMinutes() {
 
 		punchClocks.sort(Comparator.comparing(PunchClock::getDate));
 
-		double workingHours = 0;
+		double workingMinutes = 0;
 
 		for (int i = 0; i < punchClocks.size() - 1; i = i + 2) {
 
@@ -106,11 +106,11 @@ public class EmployeeWorkDay implements Serializable {
 
 			WorkingPunchClockInterval interval = new WorkingPunchClockInterval(inPunchClock, outPunchClock);
 
-			workingHours += interval.calculateHours();
+			workingMinutes += interval.calculateMinutes();
 
 		}
 
-		return workingHours;
+		return workingMinutes;
 	}
 
 	public boolean getMissingAnyRestTime() {
