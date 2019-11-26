@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -74,15 +75,28 @@ public class ResourceExceptionHandler {
 
 		List<FieldError> allFieldErrors = methodArgumentNotValidException.getBindingResult().getFieldErrors();
 
-		ValidationError validationError = new ValidationError(HttpStatus.BAD_REQUEST.value(),
-				"Validation Error", now.getTime());
+		ValidationError validationError = new ValidationError(HttpStatus.BAD_REQUEST.value(), "Validation Error",
+				now.getTime());
 
 		for (FieldError fieldError : allFieldErrors) {
 
 			FieldMessage fieldMessage = new FieldMessage(fieldError.getField(), fieldError.getDefaultMessage());
-			validationError.addFieldMessage(fieldMessage );
+			validationError.addFieldMessage(fieldMessage);
 		}
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationError);
 	}
+
+	@ExceptionHandler(AccessDeniedException.class)
+	public ResponseEntity<StandardError> accessDeniedException(AccessDeniedException accessDeniedException,
+			HttpServletRequest request) {
+
+		Date date = new Date();
+
+		StandardError error = new StandardError(HttpStatus.FORBIDDEN.value(),
+				"Access Denied", date.getTime());
+
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
+	}
+
 }
