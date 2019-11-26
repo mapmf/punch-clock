@@ -11,7 +11,7 @@ To run application with production mode turn **spring.profiles.active** to **pro
 
 > It's necessary have a database called punch_clock_prod in a MySQL instance
 
-A admin user will be available with username=**admin** and password=**admin**
+A employee with admin profile  will be available with username=**admin** and password=**admin**
 
 ### API Example Usage
 

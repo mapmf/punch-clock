@@ -34,6 +34,10 @@ public class EmployeeWorkDayResource {
 	@Autowired
 	private UserService userService;
 	
+	/**
+	* It gets the EmployeeWorkDay of given dateInMilliseconds by given employee id. 
+	* If dateInMilliseconds is not provided it gets EmployeeWorkDay of current date
+	*/
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/{employee-id}")
 	public ResponseEntity<EmployeeWorkDay> getWorkDayByEmployeeId(@PathVariable("employee-id") String employeePis,
@@ -54,6 +58,10 @@ public class EmployeeWorkDayResource {
 		return ResponseEntity.ok(workDay);
 	}
 
+	/**
+	* It gets the EmployeeWorkDay of given dateInMilliseconds by authenticated employee. 
+	* If dateInMilliseconds is not provided it gets EmployeeWorkDay of current date
+	*/
 	@GetMapping
 	public ResponseEntity<EmployeeWorkDay> getWorkDay(
 			@RequestParam(name = "dateInMilliseconds", defaultValue = "0") Long dateInMilliseconds) {
@@ -75,6 +83,14 @@ public class EmployeeWorkDayResource {
 		return ResponseEntity.ok(workDay);
 	}
 
+	/**
+	* It gets EmployeeWorkDays of given month and year by given employee id. 
+	* Month starts by 0 (Ex.: January = 0, February = 1, etc..). If month is not provided, current month will be used
+	* If year is not provide current year will be used
+	*
+	* Usage example: /employee-work-days/get-by-month/06982236360?month=10&year=2019" will returs all EmployeeWorkDays in November/2019
+	*/
+
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/get-by-month/{employee-id}")
 	public ResponseEntity<EmployeeWorkMonthDTO> getWorkDaysByMonthByEmployeeId(
@@ -93,6 +109,13 @@ public class EmployeeWorkDayResource {
 		return ResponseEntity.ok(dto);
 	}
 
+	/**
+	* It gets EmployeeWorkDays of given month and year of authenticated employee. 
+	* Month starts by 0 (Ex.: January = 0, February = 1, etc..). If month is not provided, current month will be used
+	* If year is not provide current year will be used
+	*
+	* Usage example: /employee-work-days/get-by-month/06982236360?month=10&year=2019" will returs all EmployeeWorkDays in November/2019
+	*/
 	@GetMapping("/get-by-month")
 	public ResponseEntity<EmployeeWorkMonthDTO> getWorkDaysByMonth(
 			@RequestParam(name = "month", defaultValue = "0") Integer month,

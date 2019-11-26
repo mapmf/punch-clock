@@ -24,6 +24,9 @@ public class EmployeeResource {
 	@Autowired
 	private EmployeeService employeeService;
 	
+	/**
+	* It creates a new employee
+	*/
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<Void> insert(@Valid @RequestBody EmployeeNewDTO dto){
@@ -34,6 +37,10 @@ public class EmployeeResource {
 		
 		return ResponseEntity.created(null).build();
 	}
+
+	/**
+	* It lists all employees
+	*/
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping

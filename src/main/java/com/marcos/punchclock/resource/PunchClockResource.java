@@ -28,6 +28,10 @@ public class PunchClockResource {
 	@Autowired
 	private UserService userService;
 	
+	/** 
+	* It adds a new punch clock to a employee
+	*/
+
 	@PostMapping
 	public ResponseEntity<Void> add(){
 	
